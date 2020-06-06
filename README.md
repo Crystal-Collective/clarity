@@ -1,9 +1,5 @@
-# create-react-app on Render
+# Clarity
 
-This is a minimal React static site bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+This site will consume and display the data generated in [Police Brutality During the 2020 George Floyd Protests](https://github.com/2020PB/police-brutality).
 
-The sample app is deployed on Render at https://cra.onrender.com.
-
-## Deployment
-
-Follow the guide at https://render.com/docs/deploy-create-react-app.
+This app is deployed at https://clarity.onrender.com.
