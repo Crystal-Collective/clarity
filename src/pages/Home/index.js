@@ -4,68 +4,13 @@ import { withGoogleSheets } from "react-db-google-sheets";
 import CopCardList from "../components/CopCardList";
 import "./index.css";
 
-const cops = [
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-  {
-    name: "Derek Chauvin",
-    department: "MPD",
-    location: "Minneapolis, MN",
-    status: "Active",
-  },
-];
-
 class Home extends Component {
-  constructor(props) {
-    super(props);
-    console.log(props);
-  }
-
   render() {
     const cops = this.props.db["Charged Officers"].map((data) => ({
       name: data["Officer Name"],
-      department: "MPD",
-      location: "Minneapolis, MN",
+      department: data["Officer-Affiliated Police Department "],
+      location: data["City of Incident"] + ", " + data["State of Incident"],
+      incidents: "--",
       status: "Active",
     }));
 
