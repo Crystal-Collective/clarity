@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import "./index.css";
+import PropTypes from "prop-types";
+import { withGoogleSheets } from "react-db-google-sheets";
 import CopCardList from "../components/CopCardList";
+import "./index.css";
 
 const cops = [
   {
@@ -54,9 +56,27 @@ const cops = [
 ];
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    console.log(props);
+  }
+
   render() {
+    const cops = this.props.db["Charged Officers"].map((data) => ({
+      name: data["Officer Name"],
+      department: "MPD",
+      location: "Minneapolis, MN",
+      status: "Active",
+    }));
+
     return <CopCardList cops={cops} />;
   }
 }
 
-export default Home;
+Home.propTypes = {
+  db: PropTypes.shape({
+    "Charged Officers": PropTypes.arrayOf(PropTypes.object),
+  }),
+};
+
+export default withGoogleSheets("Charged Officers")(Home);
