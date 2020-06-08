@@ -1,13 +1,61 @@
-import React, { Component } from 'react';
-import './index.css';
+import React, { Component } from "react";
+import "./index.css";
+import CopCardList from "../components/CopCardList";
+
+const cops = [
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+  {
+    name: "Derek Chauvin",
+    department: "MPD",
+    location: "Minneapolis, MN",
+    status: "Active",
+  },
+];
 
 class Home extends Component {
   render() {
-    return (
-      <div className="Home">
-      Clarity is coming!!!
-      </div>
-    );
+    return <CopCardList cops={cops} />;
   }
 }
 
