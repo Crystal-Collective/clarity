@@ -49,19 +49,22 @@ class Home extends Component {
     }));
 
     return (
-      <div align="center">
-        <TopBar>
-          <Logo>{"Crystal"}</Logo>
-          <BLM>
-            <a href="https://blacklivesmatter.com/">
-              <ReactSVG src={blmLogo} />
-            </a>
-          </BLM>
-        </TopBar>
-        <MapChart />
-        <Summary>{cops.length + " results"}</Summary>
-        <CopCardList cops={cops} />
-      </div>
+      <>
+        <title>{"Crystal"}</title>
+        <div align="center">
+          <TopBar>
+            <Logo>{"Crystal"}</Logo>
+            <BLM>
+              <a href="https://blacklivesmatter.com/">
+                <ReactSVG src={blmLogo} />
+              </a>
+            </BLM>
+          </TopBar>
+          <MapChart />
+          <Summary>{cops.length + " results"}</Summary>
+          <CopCardList cops={cops} />
+        </div>
+      </>
     );
   }
 }
