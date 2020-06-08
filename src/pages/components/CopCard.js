@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const Card = styled.div`
+  text-align: left;
   position: relative;
   margin: 13px;
   padding: 26px;
@@ -33,6 +34,7 @@ export const CardInfoItem = styled.div`
 `;
 
 export const CardFooter = styled.div`
+  color: #aaa;
   position: absolute;
   right: 26px;
   bottom: 26px;
@@ -51,7 +53,7 @@ export const StatusBadge = styled.div`
   color: white;
   border-radius: 26px;
   padding: 2px;
-  width: 50px;
+  width: 68px;
   margin-top: 4px;
   padding-left: 8px;
 `;
@@ -78,7 +80,7 @@ function CopCard(props) {
           <StatusBadge>{props.status}</StatusBadge>
         </CardInfoItem>
       </CardBody>
-      <CardFooter>{"Details →"}</CardFooter>
+      <CardFooter>{"Details (coming soon)"}</CardFooter>
     </Card>
   );
 }
