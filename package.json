@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prettier": "^2.0.5",
     "react": "^16.7.0",
     "react-db-google-sheets": "2.0.0",
     "react-dom": "^16.7.0",
@@ -28,5 +29,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "tabWidth": 2
+  }
 }
