@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withGoogleSheets } from "react-db-google-sheets";
-import CopCardList from "../components/CopCardList";
-import MapChart from "./MapChart";
 import styled from "styled-components";
+import { withGoogleSheets } from "react-db-google-sheets";
+import { CopCardList } from "components";
+import MapChart from "./MapChart";
 import { ReactSVG } from "react-svg";
-import blmLogo from "../../images/blm.svg";
-import "./index.css";
+import blmLogo from "images/blm.svg";
 
 export const TopBar = styled.div`
   position: fixed;
