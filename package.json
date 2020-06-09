@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "prettier": "^2.0.5",
     "react": "16.8.6",
     "react-db-google-sheets": "2.0.0",
     "react-dom": "16.8.6",
@@ -11,6 +12,7 @@
     "react-scripts": "^3.3.0",
     "react-simple-maps": "^2.1.2",
     "react-svg": "^11.0.25",
+    "react-table": "^7.1.0",
     "react-tooltip": "4.2.6",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
@@ -31,5 +33,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "tabWidth": 2
+  }
 }

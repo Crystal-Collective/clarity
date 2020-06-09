@@ -31,12 +31,6 @@ export const BLM = styled.div`
   position: fixed;
 `;
 
-export const Summary = styled.div`
-  color: #aaa;
-  font-size: 22px;
-  margin-bottom: 16px;
-`;
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -57,16 +51,19 @@ class Home extends Component {
     }, initStateDict);
 
     const cops = this.props.db["Charged Officers"].map((data) => ({
-      name: data["Officer Name"],
+      date: parseInt(data["Year of Incident"], 10)
+        ? parseInt(data["Year of Incident"], 10)
+        : null,
       department: data["Officer-Affiliated Police Department "],
       location: data["City of Incident"] + ", " + data["State of Incident"],
       incidents: "--",
+      name: data["Officer Name"],
+      state: data["State of Incident"],
       status: "Unknown",
       victim:
         data[
           "Victim Name(s)  (Separate with commas if multiple), use colloquial version for name. So Freddie Gray instead of Freddie Carlos Gray Jr."
         ],
-      date: data["Year of Incident"],
     }));
 
     return (
@@ -80,7 +77,6 @@ class Home extends Component {
           </BLM>
         </TopBar>
         <StateMap stateCount={stateCount} />
-        <Summary>{cops.length + " results"}</Summary>
         <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
         {this.state.selectedCop && (
           <CopPanel

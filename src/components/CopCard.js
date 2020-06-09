@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
@@ -66,29 +67,34 @@ export const StatusBadge = styled.div`
 `;
 
 function CopCard(props) {
+  const { cop, inline, onFooterClick } = props;
   return (
-    <Card inline={props.inline}>
-      <CardHeader>{props.cop.name}</CardHeader>
+    <Card inline={inline}>
+      <CardHeader>{cop.name}</CardHeader>
       <CardBody>
         <CardInfoItem>
           <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.cop.department}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.department}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.cop.location}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.location}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.cop.incidents}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.incidents}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-          <StatusBadge>{props.cop.status}</StatusBadge>
+          <StatusBadge>{cop.status}</StatusBadge>
+        </CardInfoItem>
+        <CardInfoItem>
+          <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
+          <CardInfoItemValue>{cop.date}</CardInfoItemValue>
         </CardInfoItem>
       </CardBody>
-      {!props.inline && (
-        <CardFooter onClick={() => props.onFooterClick(props.cop)}>
+      {!inline && (
+        <CardFooter onClick={() => onFooterClick(cop)}>
           {"Details"}{" "}
           <ReactSVG src={rightArrow} style={{ marginLeft: "8px" }} />
         </CardFooter>
@@ -98,3 +104,16 @@ function CopCard(props) {
 }
 
 export default CopCard;
+
+CopCard.propTypes = {
+  cop: PropTypes.shape({
+    date: PropTypes.number,
+    department: PropTypes.string,
+    incidents: PropTypes.string,
+    location: PropTypes.string,
+    name: PropTypes.string,
+    status: PropTypes.string,
+  }),
+  inline: PropTypes.bool,
+  onFooterClick: PropTypes.func,
+};
