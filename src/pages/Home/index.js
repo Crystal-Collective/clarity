@@ -44,7 +44,9 @@ class Home extends Component {
       department: data["Officer-Affiliated Police Department "],
       location: data["City of Incident"] + ", " + data["State of Incident"],
       incidents: "--",
+      state: data["State of Incident"],
       status: "Unknown",
+      year: data["Year of Incident"],
     }));
 
     return (
