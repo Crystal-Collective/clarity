@@ -79,6 +79,10 @@ function CopCard(props) {
           <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
           <StatusBadge>{props.status}</StatusBadge>
         </CardInfoItem>
+        <CardInfoItem>
+          <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
+          <CardInfoItemValue>{props.year}</CardInfoItemValue>
+        </CardInfoItem>
       </CardBody>
       <CardFooter>{"Details (coming soon)"}</CardFooter>
     </Card>
