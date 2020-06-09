@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
-import { CopCardList, CopPanel, StateMap } from "../../components";
+import { CopCardList, CopPanel, StateMap } from "components";
 import { ReactSVG } from "react-svg";
 import blmLogo from "../../images/blm.svg";
 
@@ -51,6 +51,11 @@ class Home extends Component {
       location: data["City of Incident"] + ", " + data["State of Incident"],
       incidents: "--",
       status: "Unknown",
+      victim:
+        data[
+          "Victim Name(s)  (Separate with commas if multiple), use colloquial version for name. So Freddie Gray instead of Freddie Carlos Gray Jr."
+        ],
+      date: data["Year of Incident"],
     }));
 
     return (

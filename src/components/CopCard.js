@@ -9,7 +9,7 @@ export const Card = styled.div`
   margin: 13px;
   padding: 26px;
   width: 352px;
-  height: 300px;
+  height: ${(props) => (props.inline ? "200px" : "300px")};
   box-shadow: ${(props) =>
     props.inline ? "none" : "0px 1.408px 21.12px rgba(52, 32, 1, 0.12)"};
   font-weight: 500;

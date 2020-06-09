@@ -26,7 +26,7 @@ export const Panel = styled.div`
 `;
 
 export const Back = styled.div`
-  padding: 39px;
+  margin: 39px;
   color: #000;
   display: flex;
   :hover {
@@ -50,9 +50,47 @@ function CopPanel(props) {
           </Back>
 
           <CopCard cop={props.cop} inline={true} />
+          <IncidentList
+            incidents={[{ victim: props.cop.victim, date: props.cop.date }]}
+          />
         </PanelBody>
       </Panel>
     </PanelContainer>
+  );
+}
+
+export const Incidents = styled.table`
+  margin: 39px;
+  width: 400px;
+  font-weight: 500;
+  font-size: 14px;
+`;
+
+export const Incident = styled.tr`
+  outline: thin solid;
+`;
+
+export const IncidentFieldHeader = styled.td`
+  padding: 26px;
+  color: #9c9c9c;
+`;
+
+export const IncidentFieldData = styled.td`
+  padding: 26px;
+`;
+
+function IncidentList(props) {
+  return (
+    <Incidents>
+      <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
+      <IncidentFieldHeader>{"DATE"}</IncidentFieldHeader>
+      <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
+      <Incident>
+        <IncidentFieldData>{props.incidents[0].victim}</IncidentFieldData>
+        <IncidentFieldData>{props.incidents[0].date}</IncidentFieldData>
+        <IncidentFieldData>{"--"}</IncidentFieldData>
+      </Incident>
+    </Incidents>
   );
 }
 
