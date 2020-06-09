@@ -46,7 +46,9 @@ class Home extends Component {
       incidents: "--",
       state: data["State of Incident"],
       status: "Unknown",
-      year: data["Year of Incident"],
+      year: parseInt(data["Year of Incident"], 10)
+        ? parseInt(data["Year of Incident"], 10)
+        : null,
     }));
 
     return (
