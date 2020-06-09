@@ -1,10 +1,10 @@
-import { SELECT_STATE } from 'actions/selections';
+import { SELECT_STATE } from "actions/selections";
 
 const INITIAL_STATE = {
   map_selected_state: null,
-}
+};
 
-export default function selections (state = INITIAL_STATE, action) {
+export default function selections(state = INITIAL_STATE, action) {
   switch (action.type) {
     case SELECT_STATE:
       return {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import CopCard from "./CopCard";
+import { CopCard } from "components";
 
 export const Wrapper = styled.div`
   width: 1300px;

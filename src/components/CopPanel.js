@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import CopCard from "./CopCard";
+import { CopCard } from "components";
 import leftArrow from "../images/leftarrow.svg";
 
 export const PanelContainer = styled.div`

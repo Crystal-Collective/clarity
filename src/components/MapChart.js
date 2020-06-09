@@ -20,7 +20,7 @@ const MapChart = ({ setTooltipContent, stateCount }) => {
                 stroke="#555"
                 geography={geo}
                 fill="#333"
-                onMouseEnter = {() => {
+                onMouseEnter={() => {
                   const { name } = geo.properties;
                   setTooltipContent(`${name} - ${stateCount[name]}`);
                 }}
@@ -29,8 +29,8 @@ const MapChart = ({ setTooltipContent, stateCount }) => {
                 }}
                 style={{
                   hover: {
-                      fill: "#FCE21B",
-                      outline: "none"
+                    fill: "#FCE21B",
+                    outline: "none",
                   },
                 }}
               />
