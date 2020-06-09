@@ -7559,14 +7559,14 @@ react-dev-utils@^10.2.1:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^16.7.0:
-  version "16.13.1"
-  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
+react-dom@16.8.6:
+  version "16.8.6"
+  resolved "https://registry.npm.taobao.org/react-dom/download/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.19.1"
+    scheduler "^0.13.6"
 
 react-error-overlay@^6.0.7:
   version "6.0.7"
@@ -7689,13 +7689,21 @@ react-svg@^11.0.25:
     "@tanem/svg-injector" "^8.0.52"
     prop-types "^15.7.2"
 
-react@^16.7.0:
-  version "16.13.1"
-  resolved "https://registry.npm.taobao.org/react/download/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
+react-tooltip@4.2.6:
+  version "4.2.6"
+  resolved "https://registry.npm.taobao.org/react-tooltip/download/react-tooltip-4.2.6.tgz#a3d5f0d1b0c597c0852ba09c5e2af0019b7cfc70"
+  dependencies:
+    prop-types "^15.7.2"
+    uuid "^7.0.3"
+
+react@16.8.6:
+  version "16.8.6"
+  resolved "https://registry.npm.taobao.org/react/download/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
+    scheduler "^0.13.6"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"
@@ -8121,9 +8129,9 @@ saxes@^3.1.9:
   dependencies:
     xmlchars "^2.1.1"
 
-scheduler@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+scheduler@^0.13.6:
+  version "0.13.6"
+  resolved "https://registry.npm.taobao.org/scheduler/download/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -9172,6 +9180,10 @@ utils-merge@1.0.1:
 uuid@^3.0.1, uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.4.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
+
+uuid@^7.0.3:
+  version "7.0.3"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-7.0.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-7.0.3.tgz#c5c9f2c8cf25dc0a372c4df1441c41f5bd0c680b"
 
 v8-compile-cache@^2.0.3:
   version "2.1.1"
