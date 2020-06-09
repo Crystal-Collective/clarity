@@ -1,5 +1,8 @@
+import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
+import { ReactSVG } from "react-svg";
+import rightArrow from "../images/rightarrow.svg";
 
 export const Card = styled.div`
   text-align: left;
@@ -7,8 +10,9 @@ export const Card = styled.div`
   margin: 13px;
   padding: 26px;
   width: 352px;
-  height: 300px;
-  box-shadow: 0px 1.408px 21.12px rgba(52, 32, 1, 0.12);
+  height: ${(props) => (props.inline ? "200px" : "300px")};
+  box-shadow: ${(props) =>
+    props.inline ? "none" : "0px 1.408px 21.12px rgba(52, 32, 1, 0.12)"};
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -34,10 +38,14 @@ export const CardInfoItem = styled.div`
 `;
 
 export const CardFooter = styled.div`
-  color: #aaa;
+  display: flex;
+  color: #000;
   position: absolute;
   right: 26px;
   bottom: 26px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CardInfoItemLabel = styled.div`
@@ -59,34 +67,53 @@ export const StatusBadge = styled.div`
 `;
 
 function CopCard(props) {
+  const { cop, inline, onFooterClick } = props;
   return (
-    <Card>
-      <CardHeader>{props.name}</CardHeader>
+    <Card inline={inline}>
+      <CardHeader>{cop.name}</CardHeader>
       <CardBody>
         <CardInfoItem>
           <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.department}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.department}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.location}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.location}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.incidents}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.incidents}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-          <StatusBadge>{props.status}</StatusBadge>
+          <StatusBadge>{cop.status}</StatusBadge>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.year}</CardInfoItemValue>
+          <CardInfoItemValue>{cop.date}</CardInfoItemValue>
         </CardInfoItem>
       </CardBody>
-      <CardFooter>{"Details (coming soon)"}</CardFooter>
+      {!inline && (
+        <CardFooter onClick={() => onFooterClick(cop)}>
+          {"Details"}{" "}
+          <ReactSVG src={rightArrow} style={{ marginLeft: "8px" }} />
+        </CardFooter>
+      )}
     </Card>
   );
 }
 
 export default CopCard;
+
+CopCard.propTypes = {
+  cop: PropTypes.shape({
+    date: PropTypes.number,
+    department: PropTypes.string,
+    incidents: PropTypes.string,
+    location: PropTypes.string,
+    name: PropTypes.string,
+    status: PropTypes.string,
+  }),
+  inline: PropTypes.bool,
+  onFooterClick: PropTypes.func,
+};

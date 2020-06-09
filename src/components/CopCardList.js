@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import CopCard from "./CopCard";
 import { useTable, useFilters } from "react-table";
 import CopCardFilterBar from "./CopCardFilterBar";
 import { usStates } from "fixtures/usStates";
+import { CopCard } from "components";
 
 export const Wrapper = styled.div`
   width: 1300px;
@@ -153,7 +153,7 @@ function CopCardList(props) {
       },
       {
         Header: "Year",
-        accessor: "year",
+        accessor: "date",
         Filter: NumberFilter,
       },
     ],
@@ -185,12 +185,9 @@ function CopCardList(props) {
           return (
             <CopCard
               key={i}
-              name={cop.name}
-              location={cop.location}
-              department={cop.department}
-              incidents={cop.incidents}
-              status={cop.status}
-              year={cop.year}
+              cop={cop}
+              inline={false}
+              onFooterClick={props.onCardClick}
             />
           );
         })}
