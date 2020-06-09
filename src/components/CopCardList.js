@@ -12,13 +12,7 @@ function CopCardList(props) {
   return (
     <Wrapper>
       {props.cops.map((cop) => (
-        <CopCard
-          name={cop.name}
-          location={cop.location}
-          department={cop.department}
-          incidents={cop.incidents}
-          status={cop.status}
-        />
+        <CopCard cop={cop} inline={false} onFooterClick={props.onCardClick} />
       ))}
     </Wrapper>
   );

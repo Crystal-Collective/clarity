@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
-import { CopCardList } from "components";
+import { CopCardList, CopPanel } from "../../components";
 import MapChart from "./MapChart";
 import { ReactSVG } from "react-svg";
-import blmLogo from "images/blm.svg";
+import blmLogo from "../../images/blm.svg";
 
 export const TopBar = styled.div`
   position: fixed;
@@ -13,7 +13,7 @@ export const TopBar = styled.div`
   opacity: 0.9;
   height: 74px;
   width: 100%;
-  z-index: 99;
+  z-index: 98;
 `;
 
 export const Logo = styled.div`
@@ -38,6 +38,13 @@ export const Summary = styled.div`
 `;
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedCop: undefined };
+    this.handleCopCardClicked = this.handleCopCardClicked.bind(this);
+    this.handleCopPanelClosed = this.handleCopPanelClosed.bind(this);
+  }
+
   render() {
     const cops = this.props.db["Charged Officers"].map((data) => ({
       name: data["Officer Name"],
@@ -59,9 +66,22 @@ class Home extends Component {
         </TopBar>
         <MapChart />
         <Summary>{cops.length + " results"}</Summary>
-        <CopCardList cops={cops} />
+        <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
+        {this.state.selectedCop && (
+          <CopPanel
+            cop={this.state.selectedCop}
+            show={this.state.showPanel}
+            onClose={this.handleCopPanelClosed}
+          />
+        )}
       </div>
     );
+  }
+  handleCopCardClicked(cop) {
+    this.setState({ selectedCop: cop });
+  }
+  handleCopPanelClosed() {
+    this.setState({ selectedCop: undefined });
   }
 }
 

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { ReactSVG } from "react-svg";
+import rightArrow from "../images/rightarrow.svg";
 
 export const Card = styled.div`
   text-align: left;
@@ -8,7 +10,8 @@ export const Card = styled.div`
   padding: 26px;
   width: 352px;
   height: 300px;
-  box-shadow: 0px 1.408px 21.12px rgba(52, 32, 1, 0.12);
+  box-shadow: ${(props) =>
+    props.inline ? "none" : "0px 1.408px 21.12px rgba(52, 32, 1, 0.12)"};
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -34,10 +37,14 @@ export const CardInfoItem = styled.div`
 `;
 
 export const CardFooter = styled.div`
-  color: #aaa;
+  display: flex;
+  color: #000;
   position: absolute;
   right: 26px;
   bottom: 26px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CardInfoItemLabel = styled.div`
@@ -60,27 +67,32 @@ export const StatusBadge = styled.div`
 
 function CopCard(props) {
   return (
-    <Card>
-      <CardHeader>{props.name}</CardHeader>
+    <Card inline={props.inline}>
+      <CardHeader>{props.cop.name}</CardHeader>
       <CardBody>
         <CardInfoItem>
           <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.department}</CardInfoItemValue>
+          <CardInfoItemValue>{props.cop.department}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.location}</CardInfoItemValue>
+          <CardInfoItemValue>{props.cop.location}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-          <CardInfoItemValue>{props.incidents}</CardInfoItemValue>
+          <CardInfoItemValue>{props.cop.incidents}</CardInfoItemValue>
         </CardInfoItem>
         <CardInfoItem>
           <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-          <StatusBadge>{props.status}</StatusBadge>
+          <StatusBadge>{props.cop.status}</StatusBadge>
         </CardInfoItem>
       </CardBody>
-      <CardFooter>{"Details (coming soon)"}</CardFooter>
+      {!props.inline && (
+        <CardFooter onClick={() => props.onFooterClick(props.cop)}>
+          {"Details"}{" "}
+          <ReactSVG src={rightArrow} style={{ marginLeft: "8px" }} />
+        </CardFooter>
+      )}
     </Card>
   );
 }
