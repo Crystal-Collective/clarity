@@ -3150,6 +3150,10 @@ decode-uri-component@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npm.taobao.org/decode-uri-component/download/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
 
+deep-diff@^0.3.5:
+  version "0.3.8"
+  resolved "https://registry.npm.taobao.org/deep-diff/download/deep-diff-0.3.8.tgz#c01de63efb0eec9798801d40c7e0dae25b582c84"
+
 deep-equal@^1.0.1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/deep-equal/download/deep-equal-1.1.1.tgz#b5c98c942ceffaf7cb051e24e1434a25a2e6076a"
@@ -4422,7 +4426,7 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-3.3.2.tgz?cache=0&sync_timestamp=1579746018776&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fhoist-non-react-statics%2Fdownload%2Fhoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   dependencies:
@@ -7568,9 +7572,19 @@ react-error-overlay@^6.0.7:
   version "6.0.7"
   resolved "https://registry.npm.taobao.org/react-error-overlay/download/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
 
-react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
+react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+
+react-redux@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npm.taobao.org/react-redux/download/react-redux-7.2.0.tgz#f970f62192b3981642fec46fd0db18a074fe879d"
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    hoist-non-react-statics "^3.3.0"
+    loose-envify "^1.4.0"
+    prop-types "^15.7.2"
+    react-is "^16.9.0"
 
 react-router-dom@^5.2.0:
   version "5.2.0"
@@ -7758,6 +7772,19 @@ recursive-readdir@2.2.2:
   resolved "https://registry.npm.taobao.org/recursive-readdir/download/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
   dependencies:
     minimatch "3.0.4"
+
+redux-logger@3.0.6:
+  version "3.0.6"
+  resolved "https://registry.npm.taobao.org/redux-logger/download/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
+  dependencies:
+    deep-diff "^0.3.5"
+
+redux@4.0.5:
+  version "4.0.5"
+  resolved "https://registry.npm.taobao.org/redux/download/redux-4.0.5.tgz?cache=0&sync_timestamp=1577154206919&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fredux%2Fdownload%2Fredux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+  dependencies:
+    loose-envify "^1.4.0"
+    symbol-observable "^1.2.0"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
@@ -8753,6 +8780,10 @@ svgo@^1.0.0, svgo@^1.2.2:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+symbol-observable@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/symbol-observable/download/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
 
 symbol-tree@^3.2.2:
   version "3.2.4"
