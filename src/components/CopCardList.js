@@ -27,6 +27,11 @@ const Summary = styled.div`
   margin-bottom: 16px;
 `;
 
+const Input = styled.input`
+  border: none;
+  outline: none;
+`;
+
 const Select = styled.select`
   width: 50px;
   border: none;
@@ -40,6 +45,19 @@ const Select = styled.select`
   background-position-x: 100%;
   background-position-y: -5px;
 `;
+
+// Define a default UI for filtering
+function NameFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
+  return (
+    <Input
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search...`}
+    />
+  );
+}
 
 const NumberFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id },
@@ -132,6 +150,12 @@ function CopCardList(props) {
   const data = React.useMemo(() => cops, [cops]);
   const columns = React.useMemo(
     () => [
+      {
+        Header: "Name",
+        accessor: "name", // accessor is the "key" in the data
+        Filter: NameFilter,
+        skipTitle: true,
+      },
       {
         Header: "Status",
         accessor: "status", // accessor is the "key" in the data

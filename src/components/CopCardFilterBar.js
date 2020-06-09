@@ -29,11 +29,12 @@ const CopCardFilterBar = (props) => {
   return (
     <FilterBar>
       {headers.map((column, i) => {
-        console.log(column);
+        const { Header, render } = column;
+        const titleToSkip = "Name";
         return (
           <FilterItem>
-            <FilterTitle>{column.Header}:</FilterTitle>
-            <Filter key={i}>{column.render("Filter")}</Filter>
+            {Header !== titleToSkip && <FilterTitle>{Header}:</FilterTitle>}
+            <Filter key={i}>{render("Filter")}</Filter>
           </FilterItem>
         );
       })}
