@@ -3,11 +3,11 @@ import ReactTooltip from "react-tooltip";
 
 import { MapChart } from "components";
 
-function StateMap() {
+function StateMap({ stateCount }) {
   const [content, setContent] = useState("");
   return (
     <div>
-      <MapChart setTooltipContent={setContent} />
+      <MapChart setTooltipContent={setContent} stateCount={stateCount} />
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
