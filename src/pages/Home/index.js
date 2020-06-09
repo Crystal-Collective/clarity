@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
-import { CopCardList, CopPanel } from "../../components";
-import MapChart from "./MapChart";
+import { CopCardList, CopPanel, StateMap } from "../../components";
 import { ReactSVG } from "react-svg";
 import blmLogo from "../../images/blm.svg";
 
@@ -64,7 +63,7 @@ class Home extends Component {
             </a>
           </BLM>
         </TopBar>
-        <MapChart />
+        <StateMap />
         <Summary>{cops.length + " results"}</Summary>
         <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
         {this.state.selectedCop && (
