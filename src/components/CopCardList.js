@@ -81,7 +81,6 @@ const NumberFilter = ({
 };
 
 const StateFilter = ({ column: { filterValue = "", setFilter, id } }) => {
-  console.log(usStates);
   return (
     <Select
       value={filterValue}

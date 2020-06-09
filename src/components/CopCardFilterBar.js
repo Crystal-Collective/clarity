@@ -23,7 +23,6 @@ const Filter = styled.span`
 `;
 
 const CopCardFilterBar = (props) => {
-  console.log(props);
   const { headers } = props;
 
   return (
