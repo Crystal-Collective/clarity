@@ -3,7 +3,7 @@ import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
 const geoUrl = "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json";
 
-const MapChart = ({ setTooltipContent }) => {
+const MapChart = ({ setTooltipContent, stateCount }) => {
   return (
     <ComposableMap
       data-tip=""
@@ -22,7 +22,7 @@ const MapChart = ({ setTooltipContent }) => {
                 fill="#333"
                 onMouseEnter={() => {
                   const { name } = geo.properties;
-                  setTooltipContent(`${name} - 34`);
+                  setTooltipContent(`${name} - ${stateCount[name]}`);
                 }}
                 onMouseLeave={() => {
                   setTooltipContent("");

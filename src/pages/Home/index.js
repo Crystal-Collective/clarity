@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
-import { CopCardList, CopPanel, StateMap } from "components";
+import { CopCardList, StateMap, CopPanel } from "components";
 import { ReactSVG } from "react-svg";
-import blmLogo from "../../images/blm.svg";
+import { STATES } from "constants.js";
+import blmLogo from "images/blm.svg";
 
 export const TopBar = styled.div`
   position: fixed;
@@ -45,6 +46,16 @@ class Home extends Component {
   }
 
   render() {
+    const initStateDict = STATES.reduce((acc, state) => {
+      acc[state] = 0;
+      return acc;
+    }, {});
+
+    const stateCount = this.props.db["Charged Officers"].reduce((acc, row) => {
+      acc[row["State of Incident"]] += 1;
+      return acc;
+    }, initStateDict);
+
     const cops = this.props.db["Charged Officers"].map((data) => ({
       name: data["Officer Name"],
       department: data["Officer-Affiliated Police Department "],
@@ -68,7 +79,7 @@ class Home extends Component {
             </a>
           </BLM>
         </TopBar>
-        <StateMap />
+        <StateMap stateCount={stateCount} />
         <Summary>{cops.length + " results"}</Summary>
         <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
         {this.state.selectedCop && (
