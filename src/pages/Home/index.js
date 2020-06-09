@@ -31,12 +31,6 @@ export const BLM = styled.div`
   position: fixed;
 `;
 
-export const Summary = styled.div`
-  color: #aaa;
-  font-size: 22px;
-  margin-bottom: 16px;
-`;
-
 class Home extends Component {
   render() {
     const cops = this.props.db["Charged Officers"].map((data) => ({
@@ -62,7 +56,6 @@ class Home extends Component {
           </BLM>
         </TopBar>
         <MapChart />
-        <Summary>{cops.length + " results"}</Summary>
         <CopCardList cops={cops} />
       </div>
     );

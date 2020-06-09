@@ -21,6 +21,12 @@ const EmptyWrapper = styled.div`
   justify-content: center;
 `;
 
+export const Summary = styled.div`
+  color: #aaa;
+  font-size: 22px;
+  margin-bottom: 16px;
+`;
+
 const NumberFilter = ({ column: { filterValue = null, setFilter, id } }) => {
   return (
     <input
@@ -67,19 +73,19 @@ function StatusFilter({
   // Calculate the options for filtering
   // using the preFilteredRows
   const options = React.useMemo(() => {
-    const options = new Set()
-    preFilteredRows.forEach(row => {
-      options.add(row.values[id])
-    })
-    return [...options.values()]
-  }, [id, preFilteredRows])
+    const options = new Set();
+    preFilteredRows.forEach((row) => {
+      options.add(row.values[id]);
+    });
+    return [...options.values()];
+  }, [id, preFilteredRows]);
 
   // Render a multi-select box
   return (
     <select
       value={filterValue}
-      onChange={e => {
-        setFilter(e.target.value || undefined)
+      onChange={(e) => {
+        setFilter(e.target.value || undefined);
       }}
     >
       <option value="">All</option>
@@ -89,7 +95,7 @@ function StatusFilter({
         </option>
       ))}
     </select>
-  )
+  );
 }
 
 const Empty = () => {
@@ -141,6 +147,7 @@ function CopCardList(props) {
 
   return (
     <>
+      <Summary>{rows.length + " results"}</Summary>
       <CopCardFilterBar headers={headers} />
       <Wrapper>
         {hasRows(rows) ? (
