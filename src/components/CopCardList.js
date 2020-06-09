@@ -24,6 +24,7 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
+  max-width: 150px;
   border: none;
   outline: none;
   -moz-appearance: none; /* Firefox */

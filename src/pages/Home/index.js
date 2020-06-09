@@ -59,7 +59,7 @@ class Home extends Component {
       incidents: "--",
       name: data["Officer Name"],
       state: data["State of Incident"],
-      status: "Unknown",
+      status: data["LAST KNOWN STATUS"],
       victim:
         data[
           "Victim Name(s)  (Separate with commas if multiple), use colloquial version for name. So Freddie Gray instead of Freddie Carlos Gray Jr."
