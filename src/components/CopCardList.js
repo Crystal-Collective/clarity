@@ -3,6 +3,7 @@ import styled from "styled-components";
 import CopCard from "./CopCard";
 import { useTable, useFilters } from "react-table";
 import CopCardFilterBar from "./CopCardFilterBar";
+import { usStates } from "fixtures/usStates";
 
 export const Wrapper = styled.div`
   width: 1300px;
@@ -10,44 +11,92 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-// This is a custom UI for our 'between' or number range
-// filter. It uses two number boxes and filters rows to
-// ones that have values between the two
-const NumberFilter = ({ column: { filterValue = null, setFilter, id } }) => {
-  console.log("id", id);
+const EmptyWrapper = styled.div`
+  flex: 1;
+  margin-top: 32px;
+  height: 100px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  justify-content: center;
+`;
 
+const NumberFilter = ({ column: { filterValue = null, setFilter, id } }) => {
   return (
-    <div
-      style={{
-        display: "flex",
+    <input
+      value={filterValue || ""}
+      type="number"
+      onChange={(e) => {
+        const val = e.target.value;
+        setFilter((old = null) => {
+          return val ? parseInt(val, 10) : null;
+        });
       }}
-    >
-      <input
-        value={filterValue || ""}
-        type="number"
-        onChange={(e) => {
-          const val = e.target.value;
-          setFilter((old = null) => {
-            return val ? parseInt(val, 10) : null;
-          });
-        }}
-        placeholder={`Year`}
-        style={{
-          width: "70px",
-          marginRight: "0.5rem",
-        }}
-      />
-    </div>
+      placeholder={`Year`}
+      style={{
+        width: "70px",
+        marginRight: "0.5rem",
+      }}
+    />
   );
 };
 
-const StateFilter = () => {
-  return "StateFilter";
+const StateFilter = ({ column: { filterValue = "", setFilter, id } }) => {
+  console.log(usStates);
+  return (
+    <select
+      value={filterValue}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined);
+      }}
+    >
+      <option value="">All</option>
+      {usStates.map((option, i) => (
+        <option key={option.name} value={option.name}>
+          {option.name}
+        </option>
+      ))}
+    </select>
+  );
 };
 
-const StatusFilter = () => {
-  return "StatusFilter";
+// This filter will populate its option from the available Status options in the data
+function StatusFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()]
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <select
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined)
+      }}
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  )
+}
+
+const Empty = () => {
+  return <EmptyWrapper>No results</EmptyWrapper>;
 };
+
+const hasRows = (rows) => rows && rows.length > 0;
 
 function CopCardList(props) {
   const { cops } = props;
@@ -94,20 +143,24 @@ function CopCardList(props) {
     <>
       <CopCardFilterBar headers={headers} />
       <Wrapper>
-        {rows.map((row, i) => {
-          const { original: cop } = row;
-          return (
-            <CopCard
-              key={i}
-              name={cop.name}
-              location={cop.location}
-              department={cop.department}
-              incidents={cop.incidents}
-              status={cop.status}
-              year={cop.year}
-            />
-          );
-        })}
+        {hasRows(rows) ? (
+          rows.map((row, i) => {
+            const { original: cop } = row;
+            return (
+              <CopCard
+                key={i}
+                name={cop.name}
+                location={cop.location}
+                department={cop.department}
+                incidents={cop.incidents}
+                status={cop.status}
+                year={cop.year}
+              />
+            );
+          })
+        ) : (
+          <Empty />
+        )}
       </Wrapper>
     </>
   );

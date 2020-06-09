@@ -1,10 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
-  width: 1300px;
+const FilterBar = styled.div`
   display: flex;
+  width: 80%;
+  flex-direction: row;
   flex-wrap: wrap;
+`;
+
+const FilterItem = styled.div`
+  flex: 1;
+  flex-direction: column;
+`;
+
+const Filter = styled.div`
+  flex: 1;
+`;
+
+const FilterTitle = styled.div`
+  flex: 1;
+  font-size: 18px;
 `;
 
 const CopCardFilterBar = (props) => {
@@ -12,12 +27,17 @@ const CopCardFilterBar = (props) => {
   const { headers } = props;
 
   return (
-    <Wrapper>
-      {headers.map((column) => {
+    <FilterBar>
+      {headers.map((column, i) => {
         console.log(column);
-        return column.render("Filter");
+        return (
+          <FilterItem>
+            <FilterTitle>{column.Header}</FilterTitle>
+            <Filter key={i}>{column.render("Filter")}</Filter>
+          </FilterItem>
+        );
       })}
-    </Wrapper>
+    </FilterBar>
   );
 };
 
