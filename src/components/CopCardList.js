@@ -11,20 +11,11 @@ export const Wrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const EmptyWrapper = styled.div`
-  flex: 1;
-  margin-top: 32px;
-  height: 100px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  justify-content: center;
-`;
-
 const Summary = styled.div`
   color: #aaa;
-  font-size: 22px;
-  margin-bottom: 16px;
+  font-size: 16px;
+  margin: 16px 0 8px;
+  font-weight: 500;
 `;
 
 const Input = styled.input`
@@ -33,7 +24,6 @@ const Input = styled.input`
 `;
 
 const Select = styled.select`
-  width: 50px;
   border: none;
   outline: none;
   -moz-appearance: none; /* Firefox */
@@ -44,6 +34,7 @@ const Select = styled.select`
   background-repeat: no-repeat;
   background-position-x: 100%;
   background-position-y: -5px;
+  padding-right: 15px;
 `;
 
 // Define a default UI for filtering
@@ -139,12 +130,6 @@ function StatusFilter({
   );
 }
 
-const Empty = () => {
-  return <EmptyWrapper>No results</EmptyWrapper>;
-};
-
-const hasRows = (rows) => rows && rows.length > 0;
-
 function CopCardList(props) {
   const { cops } = props;
   const data = React.useMemo(() => cops, [cops]);
@@ -192,27 +177,23 @@ function CopCardList(props) {
 
   return (
     <>
-      <Summary>{rows.length + " results"}</Summary>
       <CopCardFilterBar headers={headers} />
+      <Summary>{rows.length + " results"}</Summary>
       <Wrapper>
-        {hasRows(rows) ? (
-          rows.map((row, i) => {
-            const { original: cop } = row;
-            return (
-              <CopCard
-                key={i}
-                name={cop.name}
-                location={cop.location}
-                department={cop.department}
-                incidents={cop.incidents}
-                status={cop.status}
-                year={cop.year}
-              />
-            );
-          })
-        ) : (
-          <Empty />
-        )}
+        {rows.map((row, i) => {
+          const { original: cop } = row;
+          return (
+            <CopCard
+              key={i}
+              name={cop.name}
+              location={cop.location}
+              department={cop.department}
+              incidents={cop.incidents}
+              status={cop.status}
+              year={cop.year}
+            />
+          );
+        })}
       </Wrapper>
     </>
   );
