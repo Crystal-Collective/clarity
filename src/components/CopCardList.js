@@ -21,36 +21,60 @@ const EmptyWrapper = styled.div`
   justify-content: center;
 `;
 
-export const Summary = styled.div`
+const Summary = styled.div`
   color: #aaa;
   font-size: 22px;
   margin-bottom: 16px;
 `;
 
-const NumberFilter = ({ column: { filterValue = null, setFilter, id } }) => {
+const Select = styled.select`
+  width: 50px;
+  border: none;
+  outline: none;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: -5px;
+`;
+
+const NumberFilter = ({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) => {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set();
+    preFilteredRows.forEach((row) => {
+      row.values[id] && options.add(row.values[id]);
+    });
+    return [...options.values()].sort();
+  }, [id, preFilteredRows]);
+
   return (
-    <input
-      value={filterValue || ""}
-      type="number"
+    <Select
+      value={filterValue}
       onChange={(e) => {
-        const val = e.target.value;
-        setFilter((old = null) => {
-          return val ? parseInt(val, 10) : null;
-        });
+        setFilter(e.target.value || undefined);
       }}
-      placeholder={`Year`}
-      style={{
-        width: "70px",
-        marginRight: "0.5rem",
-      }}
-    />
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </Select>
   );
 };
 
 const StateFilter = ({ column: { filterValue = "", setFilter, id } }) => {
   console.log(usStates);
   return (
-    <select
+    <Select
       value={filterValue}
       onChange={(e) => {
         setFilter(e.target.value || undefined);
@@ -62,7 +86,7 @@ const StateFilter = ({ column: { filterValue = "", setFilter, id } }) => {
           {option.name}
         </option>
       ))}
-    </select>
+    </Select>
   );
 };
 
@@ -80,9 +104,8 @@ function StatusFilter({
     return [...options.values()];
   }, [id, preFilteredRows]);
 
-  // Render a multi-select box
   return (
-    <select
+    <Select
       value={filterValue}
       onChange={(e) => {
         setFilter(e.target.value || undefined);
@@ -94,7 +117,7 @@ function StatusFilter({
           {option}
         </option>
       ))}
-    </select>
+    </Select>
   );
 }
 
@@ -142,8 +165,6 @@ function CopCardList(props) {
   );
 
   const headers = headerGroups[0].headers;
-
-  console.log(rows);
 
   return (
     <>

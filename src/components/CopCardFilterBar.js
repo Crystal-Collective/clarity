@@ -3,23 +3,23 @@ import styled from "styled-components";
 
 const FilterBar = styled.div`
   display: flex;
-  width: 80%;
-  flex-direction: row;
-  flex-wrap: wrap;
+  align-items: center;
+  height: 80px;
+  width: 70%;
+  box-shadow: 0px 1.408px 21.12px rgba(52, 32, 1, 0.12);
 `;
 
 const FilterItem = styled.div`
   flex: 1;
-  flex-direction: column;
 `;
 
-const Filter = styled.div`
-  flex: 1;
+const FilterTitle = styled.span`
+  padding-right: 8px;
+  font-size: 12px;
 `;
 
-const FilterTitle = styled.div`
-  flex: 1;
-  font-size: 18px;
+const Filter = styled.span`
+  max-width: 100px;
 `;
 
 const CopCardFilterBar = (props) => {
@@ -32,7 +32,7 @@ const CopCardFilterBar = (props) => {
         console.log(column);
         return (
           <FilterItem>
-            <FilterTitle>{column.Header}</FilterTitle>
+            <FilterTitle>{column.Header}:</FilterTitle>
             <Filter key={i}>{column.render("Filter")}</Filter>
           </FilterItem>
         );
