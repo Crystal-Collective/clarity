@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTable, useFilters } from "react-table";
 import CopCardFilterBar from "./CopCardFilterBar";
-import { usStates } from "fixtures/usStates";
+import { STATES } from "constants.js";
 import { CopCard } from "components";
 
 export const Wrapper = styled.div`
@@ -90,9 +90,9 @@ const StateFilter = ({ column: { filterValue = "", setFilter, id } }) => {
       }}
     >
       <option value="">All</option>
-      {usStates.map((option, i) => (
-        <option key={option.name} value={option.name}>
-          {option.name}
+      {STATES.map((option, i) => (
+        <option key={option} value={option}>
+          {option}
         </option>
       ))}
     </Select>
