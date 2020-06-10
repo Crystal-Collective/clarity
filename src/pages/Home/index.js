@@ -35,44 +35,48 @@ const Content = styled.div`
   padding-top: 85px;
 `;
 
+const getChargedOfficerData = (data) => {
+  return data.map((incident, i) => {
+    return {
+      date: parseInt(incident["Year of Incident"], 10)
+        ? parseInt(incident["Year of Incident"], 10)
+        : null,
+      department: incident["Officer-Affiliated Police Department "],
+      location:
+        incident["City of Incident"] + ", " + incident["State of Incident"],
+      chargedOrIndicted: incident["Officers Criminally Charged or Indicted"],
+      incidentCount: parseInt(incident["Incident Count"], 10),
+      name: incident["Officer Name"],
+      state: incident["State of Incident"],
+      status: incident["LAST KNOWN STATUS"],
+      victim: incident["Victim Name(s)"],
+    };
+  });
+};
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedCop: undefined };
+    // Remove the first row in the table that is holding instructions
+    // https://docs.google.com/spreadsheets/d/14eyaLbQEIq3_ZKQCSHSLoyspo8Y4PoGnoW6LLfwNTmE/edit?pli=1#gid=1387748258
+    this.state = {
+      selectedCop: undefined,
+      data: getChargedOfficerData(props.db["Charged Officers"].slice(1)),
+    };
     this.handleCopCardClicked = this.handleCopCardClicked.bind(this);
     this.handleCopPanelClosed = this.handleCopPanelClosed.bind(this);
   }
 
   render() {
+    const { data } = this.state;
     const initStateDict = STATES.reduce((acc, state) => {
       acc[state] = 0;
       return acc;
     }, {});
 
-    // Remove the first row in the table that is holding instructions
-    // https://docs.google.com/spreadsheets/d/14eyaLbQEIq3_ZKQCSHSLoyspo8Y4PoGnoW6LLfwNTmE/edit?pli=1#gid=1387748258
-    const chargedOfficerData = this.props.db["Charged Officers"].slice(1);
-
-    const stateCount = chargedOfficerData.reduce((acc, row) => {
-      acc[row["State of Incident"]] += 1;
+    const stateCount = data.reduce((acc, row) => {
+      acc[row.state] += 1;
       return acc;
     }, initStateDict);
-
-    const cops = chargedOfficerData.map((data, i) => {
-      return {
-        date: parseInt(data["Year of Incident"], 10)
-          ? parseInt(data["Year of Incident"], 10)
-          : null,
-        department: data["Officer-Affiliated Police Department "],
-        location: data["City of Incident"] + ", " + data["State of Incident"],
-        chargedOrIndicted: data["Officers Criminally Charged or Indicted"],
-        incidentCount: parseInt(data["Incident Count"], 10),
-        name: data["Officer Name"],
-        state: data["State of Incident"],
-        status: data["LAST KNOWN STATUS"],
-        victim: data["Victim Name(s)"],
-      };
-    });
 
     return (
       <div align="center">
@@ -90,11 +94,11 @@ class Home extends Component {
         </TopBar>
         <Content>
           <StateMap stateCount={stateCount} />
-          <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
+          <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
           {this.state.selectedCop && (
             <CopPanel
               cop={this.state.selectedCop}
-              allCops={cops}
+              allCops={data}
               show={this.state.showPanel}
               onClose={this.handleCopPanelClosed}
             />
