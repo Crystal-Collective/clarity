@@ -59,6 +59,15 @@ export const IncidentFieldData = styled.td`
   padding: 26px;
 `;
 
+const AddReport = styled.div`
+  margin-left: 39px;
+  text-decoration: none;
+`;
+
+const ReportLink = styled.a`
+  text-decoration: none;
+`;
+
 function IncidentList(props) {
   const { incidents } = props;
   return (
@@ -95,6 +104,15 @@ function CopPanel(props) {
 
           <CopCard cop={cop} inline={true} />
           <IncidentList incidents={[{ date, chargedOrIndicted, victim }]} />
+          <AddReport>
+            <ReportLink
+              href="https://forms.gle/S4ohosYKn6NUQcps8"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              + Add a report
+            </ReportLink>
+          </AddReport>
         </PanelBody>
       </Panel>
     </PanelContainer>
