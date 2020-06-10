@@ -50,7 +50,7 @@ export const Incident = styled.tr`
   outline: thin solid;
 `;
 
-export const IncidentFieldHeader = styled.td`
+export const IncidentFieldHeader = styled.th`
   padding: 26px;
   color: #9c9c9c;
 `;
@@ -72,27 +72,37 @@ function IncidentList(props) {
   const { incidents } = props;
   return (
     <Incidents>
-      <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
-      <IncidentFieldHeader>{"DATE"}</IncidentFieldHeader>
-      <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
-      {incidents &&
-        incidents.map((incident) => {
-          const { chargedOrIndicted, date, victim } = incident;
-          return (
-            <Incident>
-              <IncidentFieldData>{victim}</IncidentFieldData>
-              <IncidentFieldData>{date}</IncidentFieldData>
-              <IncidentFieldData>{chargedOrIndicted}</IncidentFieldData>
-            </Incident>
-          );
-        })}
+      <tbody>
+        <tr>
+          <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
+          <IncidentFieldHeader>{"DATE"}</IncidentFieldHeader>
+          <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
+        </tr>
+        {incidents &&
+          incidents.map((incident, i) => {
+            const { chargedOrIndicted, date, victim } = incident;
+            return (
+              <Incident key={i}>
+                <IncidentFieldData>{victim}</IncidentFieldData>
+                <IncidentFieldData>{date}</IncidentFieldData>
+                <IncidentFieldData>{chargedOrIndicted}</IncidentFieldData>
+              </Incident>
+            );
+          })}
+      </tbody>
     </Incidents>
   );
 }
 
+const getIndictments = (cop, cops) => {
+  return cops.filter((singleCop) => {
+    return singleCop.name === cop.name;
+  });
+};
+
 function CopPanel(props) {
-  const { cop, onClose } = props;
-  const { chargedOrIndicted, date, victim } = cop;
+  const { cop, allCops, onClose } = props;
+
   return (
     <PanelContainer show={cop}>
       <Panel>
@@ -103,7 +113,7 @@ function CopPanel(props) {
           </Back>
 
           <CopCard cop={cop} inline={true} />
-          <IncidentList incidents={[{ date, chargedOrIndicted, victim }]} />
+          <IncidentList incidents={getIndictments(cop, allCops)} />
           <AddReport>
             <ReportLink
               href="https://forms.gle/S4ohosYKn6NUQcps8"

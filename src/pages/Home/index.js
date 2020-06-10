@@ -94,6 +94,7 @@ class Home extends Component {
           {this.state.selectedCop && (
             <CopPanel
               cop={this.state.selectedCop}
+              allCops={cops}
               show={this.state.showPanel}
               onClose={this.handleCopPanelClosed}
             />
