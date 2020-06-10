@@ -5,6 +5,7 @@ import CopCardFilterBar from "./CopCardFilterBar";
 import { STATES } from "constants.js";
 import { CopCard } from "components";
 import matchSorter from "match-sorter";
+import getStatusMapping from "./utils/getStatusMapping";
 
 export const Wrapper = styled.div`
   width: 1300px;
@@ -91,7 +92,9 @@ function StatusFilter({
   const options = React.useMemo(() => {
     const options = new Set();
     preFilteredRows.forEach((row) => {
-      options.add(row.values[id]);
+      if (row.values[id]) {
+        options.add(row.values[id]);
+      }
     });
     return [...options.values()];
   }, [id, preFilteredRows]);
@@ -104,11 +107,13 @@ function StatusFilter({
       }}
     >
       <option value="">All</option>
-      {options.map((option, i) => (
-        <option key={i} value={option}>
-          {option}
-        </option>
-      ))}
+      {options.map((option, i) => {
+        return (
+          <option key={i} value={option}>
+            {getStatusMapping(option)}
+          </option>
+        );
+      })}
     </Select>
   );
 }

@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
-import rightArrow from "../images/rightarrow.svg";
+import rightArrow from "images/rightarrow.svg";
+import getStatusMapping from "./utils/getStatusMapping";
 
 export const Card = styled.div`
   text-align: left;
@@ -107,7 +108,7 @@ function CopCard(props) {
         <CardRow>
           <CardInfoItemFullRow>
             <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-            <StatusBadge>{cop.status}</StatusBadge>
+            <StatusBadge>{getStatusMapping(cop.status)}</StatusBadge>
           </CardInfoItemFullRow>
         </CardRow>
       </CardBody>
