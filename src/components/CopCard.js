@@ -30,11 +30,23 @@ export const CardBody = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: column;
+`;
+
+export const CardRow = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 `;
 
 export const CardInfoItem = styled.div`
-  width: 120px;
-  margin-bottom: 26px;
+  flex: 1;
+  margin-bottom: 16px;
+`;
+
+export const CardInfoItemFullRow = styled.div`
+  flex: 1;
+  margin-bottom: 16px;
 `;
 
 export const CardFooter = styled.div`
@@ -61,7 +73,6 @@ export const StatusBadge = styled.div`
   color: white;
   border-radius: 26px;
   padding: 2px;
-  width: 68px;
   margin-top: 4px;
   padding-left: 8px;
 `;
@@ -72,26 +83,32 @@ function CopCard(props) {
     <Card inline={inline}>
       <CardHeader>{cop.name}</CardHeader>
       <CardBody>
-        <CardInfoItem>
-          <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
-          <CardInfoItemValue>{cop.department}</CardInfoItemValue>
-        </CardInfoItem>
-        <CardInfoItem>
-          <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-          <CardInfoItemValue>{cop.location}</CardInfoItemValue>
-        </CardInfoItem>
-        <CardInfoItem>
-          <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-          <CardInfoItemValue>{cop.incidents}</CardInfoItemValue>
-        </CardInfoItem>
-        <CardInfoItem>
-          <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-          <StatusBadge>{cop.status}</StatusBadge>
-        </CardInfoItem>
-        <CardInfoItem>
-          <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
-          <CardInfoItemValue>{cop.date}</CardInfoItemValue>
-        </CardInfoItem>
+        <CardRow>
+          <CardInfoItem>
+            <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
+            <CardInfoItemValue>{cop.department}</CardInfoItemValue>
+          </CardInfoItem>
+          <CardInfoItem>
+            <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
+            <CardInfoItemValue>{cop.location}</CardInfoItemValue>
+          </CardInfoItem>
+        </CardRow>
+        <CardRow>
+          <CardInfoItem>
+            <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
+            <CardInfoItemValue>{cop.incidents}</CardInfoItemValue>
+          </CardInfoItem>
+          <CardInfoItem>
+            <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
+            <CardInfoItemValue>{cop.date}</CardInfoItemValue>
+          </CardInfoItem>
+        </CardRow>
+        <CardRow>
+          <CardInfoItemFullRow>
+            <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
+            <StatusBadge>{cop.status}</StatusBadge>
+          </CardInfoItemFullRow>
+        </CardRow>
       </CardBody>
       {!inline && (
         <CardFooter onClick={() => onFooterClick(cop)}>
