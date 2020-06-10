@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopPanel } from "components";
-import { ReactSVG } from "react-svg";
 import { STATES } from "constants.js";
-import report from "images/report.svg";
 
 const yellow = "#fce21b";
 

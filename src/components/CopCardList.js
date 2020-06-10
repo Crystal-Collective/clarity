@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   width: 1300px;
   display: flex;
   flex-wrap: wrap;
+  min-height: 400px;
 `;
 
 const Summary = styled.div`
