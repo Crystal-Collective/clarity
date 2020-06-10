@@ -7,6 +7,8 @@ import { ReactSVG } from "react-svg";
 import { STATES } from "constants.js";
 import report from "images/report.svg";
 
+const yellow = "#fce21b";
+
 export const TopBar = styled.div`
   position: fixed;
   background-color: black;
@@ -20,15 +22,29 @@ export const Logo = styled.div`
   left: 300px;
   top: 20px;
   position: fixed;
-  color: #fce21b;
+  color: ${yellow};
   font-size: 30px;
   font-weight: 800;
 `;
 
-export const Report = styled.div`
+const Report = styled.div`
+  right: 700px;
+  top: 24px;
+  position: fixed;
+`;
+
+const Volunteer = styled.div`
   right: 500px;
   top: 24px;
   position: fixed;
+  color: ${yellow};
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  color: ${yellow};
 `;
 
 const Content = styled.div`
@@ -83,14 +99,23 @@ class Home extends Component {
         <TopBar>
           <Logo>{"Crystal"}</Logo>
           <Report>
-            <a
+            <Link
               href="https://forms.gle/S4ohosYKn6NUQcps8"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ReactSVG src={report} />
-            </a>
+              + REPORT
+            </Link>
           </Report>
+          <Volunteer>
+            <Link
+              href="https://forms.gle/qD7MHiMiV35kZDvX7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VOLUNTEER
+            </Link>
+          </Volunteer>
         </TopBar>
         <Content>
           <StateMap stateCount={stateCount} />
