@@ -24,6 +24,7 @@ const Filter = styled.span`
 `;
 
 const Input = styled.input`
+  min-width: 200px;
   border: none;
   outline: none;
 `;
@@ -41,7 +42,7 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
         setValue(e.target.value);
         onChange(e.target.value);
       }}
-      placeholder={`Search...`}
+      placeholder={`Search By Officer or Victim Name...`}
     />
   );
 };
