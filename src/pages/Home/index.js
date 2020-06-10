@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopPanel } from "components";
-// import { ReactSVG } from "react-svg";
+import { ReactSVG } from "react-svg";
 import { STATES } from "constants.js";
-// import blmLogo from "images/blm.svg";
+import report from "images/report.svg";
 
 export const TopBar = styled.div`
   position: fixed;
@@ -25,9 +25,9 @@ export const Logo = styled.div`
   font-weight: 800;
 `;
 
-export const BLM = styled.div`
-  right: 300px;
-  top: 0px;
+export const Report = styled.div`
+  right: 500px;
+  top: 24px;
   position: fixed;
 `;
 
@@ -74,11 +74,15 @@ class Home extends Component {
       <div align="center">
         <TopBar>
           <Logo>{"Crystal"}</Logo>
-          <BLM>
-            {/* <a href="https://blacklivesmatter.com/">
-              <ReactSVG src={blmLogo} />
-            </a> */}
-          </BLM>
+          <Report>
+            <a
+              href="https://forms.gle/S4ohosYKn6NUQcps8"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ReactSVG src={report} />
+            </a>
+          </Report>
         </TopBar>
         <Content>
           <StateMap stateCount={stateCount} />
