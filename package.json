@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash": "^4.17.15",
+    "match-sorter": "^4.1.0",
     "prettier": "^2.0.5",
     "react": "16.8.6",
     "react-db-google-sheets": "2.0.0",
