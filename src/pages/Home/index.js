@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopPanel } from "components";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 import { STATES } from "constants.js";
-import blmLogo from "images/blm.svg";
+// import blmLogo from "images/blm.svg";
 
 export const TopBar = styled.div`
   position: fixed;
@@ -29,6 +29,10 @@ export const BLM = styled.div`
   right: 300px;
   top: 0px;
   position: fixed;
+`;
+
+const Content = styled.div`
+  margin-top: 75px;
 `;
 
 class Home extends Component {
@@ -71,20 +75,22 @@ class Home extends Component {
         <TopBar>
           <Logo>{"Crystal"}</Logo>
           <BLM>
-            <a href="https://blacklivesmatter.com/">
+            {/* <a href="https://blacklivesmatter.com/">
               <ReactSVG src={blmLogo} />
-            </a>
+            </a> */}
           </BLM>
         </TopBar>
-        <StateMap stateCount={stateCount} />
-        <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
-        {this.state.selectedCop && (
-          <CopPanel
-            cop={this.state.selectedCop}
-            show={this.state.showPanel}
-            onClose={this.handleCopPanelClosed}
-          />
-        )}
+        <Content>
+          <StateMap stateCount={stateCount} />
+          <CopCardList cops={cops} onCardClick={this.handleCopCardClicked} />
+          {this.state.selectedCop && (
+            <CopPanel
+              cop={this.state.selectedCop}
+              show={this.state.showPanel}
+              onClose={this.handleCopPanelClosed}
+            />
+          )}
+        </Content>
       </div>
     );
   }
