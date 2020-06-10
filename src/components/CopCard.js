@@ -127,6 +127,7 @@ export default CopCard;
 
 CopCard.propTypes = {
   cop: PropTypes.shape({
+    chargedOrIndicted: PropTypes.string,
     date: PropTypes.number,
     department: PropTypes.string,
     incidentCount: PropTypes.number,

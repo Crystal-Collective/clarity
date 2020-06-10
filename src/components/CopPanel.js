@@ -39,26 +39,6 @@ export const PanelBody = styled.div`
   margin-top: 75px;
 `;
 
-function CopPanel(props) {
-  return (
-    <PanelContainer show={props.cop}>
-      <Panel>
-        <PanelBody>
-          <Back onClick={props.onClose}>
-            <ReactSVG src={leftArrow} style={{ marginRight: "8px" }} />
-            {"Back"}
-          </Back>
-
-          <CopCard cop={props.cop} inline={true} />
-          <IncidentList
-            incidents={[{ victim: props.cop.victim, date: props.cop.date }]}
-          />
-        </PanelBody>
-      </Panel>
-    </PanelContainer>
-  );
-}
-
 export const Incidents = styled.table`
   margin: 39px;
   width: 400px;
@@ -80,17 +60,44 @@ export const IncidentFieldData = styled.td`
 `;
 
 function IncidentList(props) {
+  const { incidents } = props;
   return (
     <Incidents>
       <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
       <IncidentFieldHeader>{"DATE"}</IncidentFieldHeader>
       <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
-      <Incident>
-        <IncidentFieldData>{props.incidents[0].victim}</IncidentFieldData>
-        <IncidentFieldData>{props.incidents[0].date}</IncidentFieldData>
-        <IncidentFieldData>{"--"}</IncidentFieldData>
-      </Incident>
+      {incidents &&
+        incidents.map((incident) => {
+          const { chargedOrIndicted, date, victim } = incident;
+          return (
+            <Incident>
+              <IncidentFieldData>{victim}</IncidentFieldData>
+              <IncidentFieldData>{date}</IncidentFieldData>
+              <IncidentFieldData>{chargedOrIndicted}</IncidentFieldData>
+            </Incident>
+          );
+        })}
     </Incidents>
+  );
+}
+
+function CopPanel(props) {
+  const { cop, onClose } = props;
+  const { chargedOrIndicted, date, victim } = cop;
+  return (
+    <PanelContainer show={cop}>
+      <Panel>
+        <PanelBody>
+          <Back onClick={onClose}>
+            <ReactSVG src={leftArrow} style={{ marginRight: "8px" }} />
+            {"Back"}
+          </Back>
+
+          <CopCard cop={cop} inline={true} />
+          <IncidentList incidents={[{ date, chargedOrIndicted, victim }]} />
+        </PanelBody>
+      </Panel>
+    </PanelContainer>
   );
 }
 
