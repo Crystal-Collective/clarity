@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useTable, useFilters } from "react-table";
+import { useGlobalFilter, useTable, useFilters } from "react-table";
 import CopCardFilterBar from "./CopCardFilterBar";
 import { STATES } from "constants.js";
 import { CopCard } from "components";
+import matchSorter from "match-sorter";
 
 export const Wrapper = styled.div`
   width: 1300px;
@@ -16,11 +17,6 @@ const Summary = styled.div`
   font-size: 16px;
   margin: 16px 0 8px;
   font-weight: 500;
-`;
-
-const Input = styled.input`
-  border: none;
-  outline: none;
 `;
 
 const Select = styled.select`
@@ -37,19 +33,6 @@ const Select = styled.select`
   background-position-y: -5px;
   padding-right: 15px;
 `;
-
-// Define a default UI for filtering
-function NameFilter({ column: { filterValue, preFilteredRows, setFilter } }) {
-  return (
-    <Input
-      value={filterValue || ""}
-      onChange={(e) => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-      }}
-      placeholder={`Search...`}
-    />
-  );
-}
 
 const NumberFilter = ({
   column: { filterValue, setFilter, preFilteredRows, id },
@@ -130,6 +113,13 @@ function StatusFilter({
   );
 }
 
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
+}
+
+// Let the table remove the filter if the string is empty
+fuzzyTextFilterFn.autoRemove = (val) => !val;
+
 function CopCardList(props) {
   const { cops } = props;
   const data = React.useMemo(() => cops, [cops]);
@@ -137,24 +127,29 @@ function CopCardList(props) {
     () => [
       {
         Header: "Name",
-        accessor: "name", // accessor is the "key" in the data
-        Filter: NameFilter,
-        skipTitle: true,
+        accessor: "name",
       },
       {
         Header: "Status",
         accessor: "status", // accessor is the "key" in the data
         Filter: StatusFilter,
+        useFilter: true,
       },
       {
         Header: "State",
         accessor: "state",
         Filter: StateFilter,
+        useFilter: true,
+      },
+      {
+        Header: "Victim",
+        accessor: "victim",
       },
       {
         Header: "Year",
         accessor: "date",
         Filter: NumberFilter,
+        useFilter: true,
       },
     ],
     []
@@ -168,16 +163,41 @@ function CopCardList(props) {
     []
   );
 
-  const { headerGroups, rows } = useTable(
-    { columns, data, defaultColumn },
-    useFilters
+  const filterTypes = React.useMemo(
+    () => ({
+      // Add a new fuzzyTextFilterFn filter type.
+      fuzzyText: fuzzyTextFilterFn,
+      // Or, override the default text filter to use
+      // "startWith"
+      text: (rows, id, filterValue) => {
+        return rows.filter((row) => {
+          const rowValue = row.values[id];
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true;
+        });
+      },
+    }),
+    []
+  );
+
+  const { headerGroups, rows, setGlobalFilter, state } = useTable(
+    { columns, data, defaultColumn, filterTypes },
+    useFilters,
+    useGlobalFilter
   );
 
   const headers = headerGroups[0].headers;
 
   return (
     <>
-      <CopCardFilterBar headers={headers} />
+      <CopCardFilterBar
+        headers={headers}
+        setGlobalFilter={setGlobalFilter}
+        globalFilter={state.globalFilter}
+      />
       <Summary>{rows.length + " results"}</Summary>
       <Wrapper>
         {rows.map((row, i) => {

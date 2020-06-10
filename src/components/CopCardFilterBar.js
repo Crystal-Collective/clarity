@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useAsyncDebounce } from "react-table";
 
 const FilterBar = styled.div`
   display: flex;
@@ -22,18 +23,50 @@ const Filter = styled.span`
   max-width: 100px;
 `;
 
+const Input = styled.input`
+  border: none;
+  outline: none;
+`;
+
+const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = useAsyncDebounce((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
+
+  return (
+    <Input
+      value={value || ""}
+      onChange={(e) => {
+        setValue(e.target.value);
+        onChange(e.target.value);
+      }}
+      placeholder={`Search...`}
+    />
+  );
+};
+
 const CopCardFilterBar = (props) => {
-  const { headers } = props;
+  const { headers, setGlobalFilter, globalFilter } = props;
+  const filters = headers.filter((header) => {
+    return header.useFilter;
+  });
 
   return (
     <FilterBar>
-      {headers.map((column, i) => {
+      <FilterItem>
+        <GlobalFilter
+          setGlobalFilter={setGlobalFilter}
+          globalFilter={globalFilter}
+        />
+      </FilterItem>
+      {filters.map((column, i) => {
         const { Header, render } = column;
         const titleToSkip = "Name";
         return (
-          <FilterItem>
+          <FilterItem key={i}>
             {Header !== titleToSkip && <FilterTitle>{Header}:</FilterTitle>}
-            <Filter key={i}>{render("Filter")}</Filter>
+            <Filter>{render("Filter")}</Filter>
           </FilterItem>
         );
       })}
