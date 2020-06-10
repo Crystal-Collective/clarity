@@ -65,7 +65,7 @@ class Home extends Component {
           : null,
         department: data["Officer-Affiliated Police Department "],
         location: data["City of Incident"] + ", " + data["State of Incident"],
-        incidents: "--",
+        incidentCount: parseInt(data["Incident Count"], 10),
         name: data["Officer Name"],
         state: data["State of Incident"],
         status: data["LAST KNOWN STATUS"],

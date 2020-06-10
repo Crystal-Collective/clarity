@@ -81,34 +81,35 @@ export const StatusBadge = styled.div`
 
 function CopCard(props) {
   const { cop, inline, onFooterClick } = props;
+  const { date, incidentCount, location, name, status, victim } = cop;
   return (
     <Card inline={inline}>
-      <CardHeader>{cop.name}</CardHeader>
+      <CardHeader>{name}</CardHeader>
       <CardBody>
         <CardRow>
           <CardInfoItem>
             <CardInfoItemLabel>{"RECENT INCIDENT"}</CardInfoItemLabel>
-            <CardInfoItemValue>{cop.victim}</CardInfoItemValue>
+            <CardInfoItemValue>{victim}</CardInfoItemValue>
           </CardInfoItem>
           <CardInfoItem>
             <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-            <CardInfoItemValue>{cop.location}</CardInfoItemValue>
+            <CardInfoItemValue>{location}</CardInfoItemValue>
           </CardInfoItem>
         </CardRow>
         <CardRow>
           <CardInfoItem>
             <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-            <CardInfoItemValue>{cop.incidents}</CardInfoItemValue>
+            <CardInfoItemValue>{incidentCount}</CardInfoItemValue>
           </CardInfoItem>
           <CardInfoItem>
             <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
-            <CardInfoItemValue>{cop.date}</CardInfoItemValue>
+            <CardInfoItemValue>{date}</CardInfoItemValue>
           </CardInfoItem>
         </CardRow>
         <CardRow>
           <CardInfoItemFullRow>
             <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-            <StatusBadge>{getStatusMapping(cop.status)}</StatusBadge>
+            <StatusBadge>{getStatusMapping(status)}</StatusBadge>
           </CardInfoItemFullRow>
         </CardRow>
       </CardBody>
@@ -128,11 +129,12 @@ CopCard.propTypes = {
   cop: PropTypes.shape({
     date: PropTypes.number,
     department: PropTypes.string,
-    incidents: PropTypes.string,
+    incidentCount: PropTypes.number,
     location: PropTypes.string,
     name: PropTypes.string,
     status: PropTypes.string,
   }),
+  data: PropTypes.array,
   inline: PropTypes.bool,
   onFooterClick: PropTypes.func,
 };
