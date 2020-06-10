@@ -49,7 +49,11 @@ class Home extends Component {
       return acc;
     }, {});
 
-    const stateCount = this.props.db["Charged Officers"].reduce((acc, row) => {
+    // Remove the first row in the table that is holding instructions
+    // https://docs.google.com/spreadsheets/d/14eyaLbQEIq3_ZKQCSHSLoyspo8Y4PoGnoW6LLfwNTmE/edit?pli=1#gid=1387748258
+    const chargedOfficerData = this.props.db["Charged Officers"].slice(1);
+
+    const stateCount = chargedOfficerData.reduce((acc, row) => {
       acc[row["State of Incident"]] += 1;
       return acc;
     }, initStateDict);
