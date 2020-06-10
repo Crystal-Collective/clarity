@@ -58,21 +58,20 @@ class Home extends Component {
       return acc;
     }, initStateDict);
 
-    const cops = this.props.db["Charged Officers"].map((data) => ({
-      date: parseInt(data["Year of Incident"], 10)
-        ? parseInt(data["Year of Incident"], 10)
-        : null,
-      department: data["Officer-Affiliated Police Department "],
-      location: data["City of Incident"] + ", " + data["State of Incident"],
-      incidents: "--",
-      name: data["Officer Name"],
-      state: data["State of Incident"],
-      status: data["LAST KNOWN STATUS"],
-      victim:
-        data[
-          "Victim Name(s)  (Separate with commas if multiple), use colloquial version for name. So Freddie Gray instead of Freddie Carlos Gray Jr."
-        ],
-    }));
+    const cops = chargedOfficerData.map((data, i) => {
+      return {
+        date: parseInt(data["Year of Incident"], 10)
+          ? parseInt(data["Year of Incident"], 10)
+          : null,
+        department: data["Officer-Affiliated Police Department "],
+        location: data["City of Incident"] + ", " + data["State of Incident"],
+        incidents: "--",
+        name: data["Officer Name"],
+        state: data["State of Incident"],
+        status: data["LAST KNOWN STATUS"],
+        victim: data["Victim Name(s)"],
+      };
+    });
 
     return (
       <div align="center">

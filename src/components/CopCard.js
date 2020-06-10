@@ -86,8 +86,8 @@ function CopCard(props) {
       <CardBody>
         <CardRow>
           <CardInfoItem>
-            <CardInfoItemLabel>{"CURRENT DEP"}</CardInfoItemLabel>
-            <CardInfoItemValue>{cop.department}</CardInfoItemValue>
+            <CardInfoItemLabel>{"RECENT INCIDENT"}</CardInfoItemLabel>
+            <CardInfoItemValue>{cop.victim}</CardInfoItemValue>
           </CardInfoItem>
           <CardInfoItem>
             <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
