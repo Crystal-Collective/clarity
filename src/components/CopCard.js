@@ -74,7 +74,8 @@ export const StatusBadge = styled.div`
   border-radius: 26px;
   padding: 2px;
   margin-top: 4px;
-  padding-left: 8px;
+  padding: 4px 8px;
+  display: inline-block;
 `;
 
 function CopCard(props) {

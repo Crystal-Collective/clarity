@@ -32,7 +32,7 @@ export const BLM = styled.div`
 `;
 
 const Content = styled.div`
-  margin-top: 75px;
+  padding-top: 85px;
 `;
 
 class Home extends Component {
