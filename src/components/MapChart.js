@@ -21,7 +21,7 @@ const MapChart = ({ setTooltipContent, stateCount }) => {
       data-tip=""
       projection="geoAlbersUsa"
       width={1500}
-      style={{ marginTop: "-70px" }}
+      style={{ marginTop: "-35px" }}
     >
       <Geographies geography={geoUrl}>
         {({ geographies }) => (

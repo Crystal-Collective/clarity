@@ -1,10 +1,13 @@
 import React from "react";
 import GoogleSheetsProvider from "react-db-google-sheets";
-import { Home } from "pages";
+import { Navigation } from "pages";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => (
   <GoogleSheetsProvider>
-    <Home />
+    <Router>
+      <Navigation />
+    </Router>
   </GoogleSheetsProvider>
 );
 
