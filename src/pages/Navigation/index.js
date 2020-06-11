@@ -84,16 +84,16 @@ class Navigation extends Component {
             </AboutNavButton>
             <Contribute>
               <YellowLink
-                href="http://docs.google.com/forms/d/e/1FAIpQLScjbFNwXTWvcoYDZNAeVwmhUITq_kjIiri6l4ZsrPXLEEOZ3Q/viewform"
+                href="https://join.slack.com/t/crystalpolice/shared_invite/zt-essyn1xu-G5CAEuWgvSaZ04iIQ11FCQ"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Contribute
+                Join 100+ on Slack
               </YellowLink>
             </Contribute>
             <Feedback>
               <YellowLink
-                href="https://trello.com/invite/b/gabFGnhB/5f3c74b8836b960385326e9bf2f92c59/crystal-mvp-feedback-tickets"
+                href="https://docs.google.com/spreadsheets/d/1_8sFcTwqlBvVgd7XTekIdBGQnMdyAnB5qxuKObwdauw/edit#gid=0"
                 target="_blank"
                 rel="noopener noreferrer"
               >
