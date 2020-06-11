@@ -98,12 +98,12 @@ function CopCard(props) {
         </CardRow>
         <CardRow>
           <CardInfoItem>
-            <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-            <CardInfoItemValue>{incidentCount}</CardInfoItemValue>
-          </CardInfoItem>
-          <CardInfoItem>
             <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
             <CardInfoItemValue>{date}</CardInfoItemValue>
+          </CardInfoItem>
+          <CardInfoItem>
+            <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
+            <CardInfoItemValue>{incidentCount}</CardInfoItemValue>
           </CardInfoItem>
         </CardRow>
         <CardRow>
