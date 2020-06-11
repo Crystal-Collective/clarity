@@ -49,6 +49,7 @@ class Home extends Component {
 
     return (
       <div align="center">
+        <div> Test </div>
         <StateMap stateCount={stateCount} />
         <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
         {this.state.selectedCop && (
