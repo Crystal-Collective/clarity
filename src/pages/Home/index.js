@@ -49,7 +49,7 @@ class Home extends Component {
 
     return (
       <div align="center">
-        <div> Test </div>
+        <div> Search & Submit Police Records </div>
         <StateMap stateCount={stateCount} />
         <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
         {this.state.selectedCop && (
