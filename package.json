@@ -9,6 +9,7 @@
     "react": "16.8.6",
     "react-db-google-sheets": "2.0.0",
     "react-dom": "16.8.6",
+    "react-ga": "^3.0.0",
     "react-redux": "7.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.3.0",
