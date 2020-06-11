@@ -75,7 +75,7 @@ function IncidentList(props) {
       <tbody>
         <tr>
           <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
-          <IncidentFieldHeader>{"DATE"}</IncidentFieldHeader>
+          <IncidentFieldHeader>{"YEAR"}</IncidentFieldHeader>
           <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
         </tr>
         {incidents &&
