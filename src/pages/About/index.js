@@ -117,7 +117,7 @@ function About(props) {
           could use some help from the open-source community! Consider
           volunteering with Crystal and join{" "}
           <YellowLink
-            href="https://clarity.onrender.com/"
+            href="https://join.slack.com/t/crystalpolice/shared_invite/zt-essyn1xu-G5CAEuWgvSaZ04iIQ11FCQ"
             target="_blank"
             rel="noopener noreferrer"
           >
