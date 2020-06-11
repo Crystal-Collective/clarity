@@ -3,3 +3,18 @@
   font-weight: 700;
   color: #fce21b;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.app-body {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}

@@ -5,8 +5,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => (
   <GoogleSheetsProvider>
-    <Router>
-      <Navigation />
+    <Router style={{ height: "100%" }}>
+      <Navigation style={{ height: "100%" }} />
     </Router>
   </GoogleSheetsProvider>
 );

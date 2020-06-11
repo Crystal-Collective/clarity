@@ -69,7 +69,7 @@ const Content = styled.div`
 class Navigation extends Component {
   render() {
     return (
-      <div align="center">
+      <div className="app-body" align="center">
         <TopBar>
           <Header>
             <Logo>
@@ -111,7 +111,7 @@ class Navigation extends Component {
             </Report>
           </Header>
         </TopBar>
-        <Content>
+        <Content style={{ flexGrow: "1" }}>
           <Route exact={true} path="/">
             <Home />
           </Route>
