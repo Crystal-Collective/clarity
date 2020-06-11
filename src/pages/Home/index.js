@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { withGoogleSheets } from "react-db-google-sheets";
-import { CopCardList, StateMap, CopPanel } from "components";
+import { CopCardList, StateMap, CopDetail } from "components";
 import { STATES } from "constants.js";
 
 const yellow = "#fce21b";
@@ -77,7 +77,7 @@ class Home extends Component {
       data: getChargedOfficerData(props.db["Charged Officers"].slice(1)),
     };
     this.handleCopCardClicked = this.handleCopCardClicked.bind(this);
-    this.handleCopPanelClosed = this.handleCopPanelClosed.bind(this);
+    this.handleCopDetailClosed = this.handleCopDetailClosed.bind(this);
   }
 
   render() {
@@ -119,11 +119,11 @@ class Home extends Component {
           <StateMap stateCount={stateCount} />
           <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
           {this.state.selectedCop && (
-            <CopPanel
+            <CopDetail
               cop={this.state.selectedCop}
               allCops={data}
               show={this.state.showPanel}
-              onClose={this.handleCopPanelClosed}
+              onClose={this.handleCopDetailClosed}
             />
           )}
         </Content>
@@ -133,7 +133,7 @@ class Home extends Component {
   handleCopCardClicked(cop) {
     this.setState({ selectedCop: cop });
   }
-  handleCopPanelClosed() {
+  handleCopDetailClosed() {
     this.setState({ selectedCop: undefined });
   }
 }

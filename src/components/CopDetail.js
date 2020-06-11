@@ -100,7 +100,7 @@ const getIndictments = (cop, cops) => {
   });
 };
 
-function CopPanel(props) {
+function CopDetail(props) {
   const { cop, allCops, onClose } = props;
 
   return (
@@ -129,4 +129,4 @@ function CopPanel(props) {
   );
 }
 
-export default CopPanel;
+export default CopDetail;

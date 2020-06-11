@@ -15,5 +15,5 @@ export default (status) => {
     UNKNOWN: "Unknown",
   };
 
-  return statusMap[status] ? statusMap[status] : status;
+  return statusMap[status] ? statusMap[status] : statusMap["UNKNOWN"];
 };
