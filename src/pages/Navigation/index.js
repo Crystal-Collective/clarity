@@ -10,8 +10,7 @@ const reallyReallyDarkGrey = "#333";
 
 export const TopBar = styled.div`
   position: fixed;
-  background-color: black;
-  opacity: 0.9;
+  background-color: #181818;
   height: 74px;
   width: 100%;
   z-index: 98;
@@ -37,9 +36,7 @@ const NavButton = styled.div`
   color: ${yellow};
 `;
 
-const AboutNavButton = styled(NavButton)``;
-
-const HomeNavButton = styled(NavButton)`
+const AboutNavButton = styled(NavButton)`
   margin-left: auto;
 `;
 
@@ -66,7 +63,7 @@ const DarkGreyLink = styled.a`
 `;
 
 const Content = styled.div`
-  padding-top: 85px;
+  padding-top: 74px;
 `;
 
 class Navigation extends Component {
@@ -76,19 +73,10 @@ class Navigation extends Component {
         <TopBar>
           <Header>
             <Logo>
-              <YellowLink
-                href="https://crystalproject-info.onrender.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {"Crystal"}
-              </YellowLink>
-            </Logo>
-            <HomeNavButton>
               <Link className="navigation-link" to={"/"}>
-                Home
+                Crystal
               </Link>
-            </HomeNavButton>
+            </Logo>
             <AboutNavButton>
               <Link className="navigation-link" to={"/about"}>
                 About
