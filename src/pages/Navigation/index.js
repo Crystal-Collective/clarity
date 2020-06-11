@@ -88,7 +88,7 @@ class Navigation extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Join 100+ on Slack
+                Discuss on Slack
               </YellowLink>
             </Contribute>
             <Feedback>
