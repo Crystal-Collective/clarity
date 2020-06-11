@@ -14,7 +14,9 @@ const getChargedOfficerData = (data) => {
       location:
         incident["City of Incident"] + ", " + incident["State of Incident"],
       chargedOrIndicted: incident["Officers Criminally Charged or Indicted"],
-      incidentCount: parseInt(incident["Incident Count"], 10),
+      incidentCount: parseInt(incident["Incident Count"], 10)
+        ? parseInt(incident["Incident Count"], 10)
+        : null,
       name: incident["Officer Name"],
       state: incident["State of Incident"],
       status: incident["LAST KNOWN STATUS"],
