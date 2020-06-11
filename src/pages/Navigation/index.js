@@ -97,7 +97,7 @@ class Navigation extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Feedback
+                Give Feedback
               </YellowLink>
             </Feedback>
             <Report>
