@@ -204,7 +204,7 @@ function CopCardList(props) {
         setGlobalFilter={setGlobalFilter}
         globalFilter={state.globalFilter}
       />
-      <Summary>{rows.length + " results"}</Summary>
+      <Summary>{`${rows.length} cleaned records of 5,000 total records`}</Summary>
       <Wrapper>
         {rows.map((row, i) => {
           const { original: cop } = row;
