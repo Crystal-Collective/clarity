@@ -51,8 +51,8 @@ function About(props) {
           Provide feedback
         </YellowLink>
         <p>
-          Our goal is to curate a database moderated by communities across the
-          country. We hope to build upon and incorporate the excellent work
+          Our goal is to empower citizens to report and curate an accurate record of police officer behavior across
+          the country. We hope to build upon and incorporate the excellent work
           being done by a number of projects, including{" "}
           <YellowLink
             href="https://www.raheem.ai/"
