@@ -14,25 +14,21 @@ function About(props) {
     <div className="about-page">
       <div className="about-page-content">
         <p className="about-page-leader">
-          We are a diverse, growing community of journalists, technologists,
-          lawyers, community activists, and more — 100 members and growing! —
-          around the globe who believe in the power of{" "}
+          We are a diverse and growing community who believe in the power of{" "}
           <YellowLink
             href="https://crystalproject-info.onrender.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            technology for justice.
+            technology and engaging products as tools for eradicating injustice.
           </YellowLink>
         </p>
         <p>
           One week after the killing of George Floyd on the streets of
-          Minneapolis, we decided to build our first product, Crystal: a
-          database of law enforcement officers and agencies from around the
-          nation to bring the transparency that our communities deserve. By
-          empowering citizens to not only access, but also contribute to data
-          about their local police and law enforcement agencies, we hope Crystal
-          will be the Wiki for policing.
+          Minneapolis, we decided to build our first product. 
+          Crystal is a community curated database of US law enforcement officers and agencies. 
+          By empowering citizens to contribute in addition to accessing data about their local police and law enforcement agencies, we envision Crystal
+          becoming a trusted bedrock of transparent, accountable and collective law enforcement.
         </p>
         <YellowLink
           href="http://docs.google.com/forms/d/e/1FAIpQLScjbFNwXTWvcoYDZNAeVwmhUITq_kjIiri6l4ZsrPXLEEOZ3Q/viewform"
