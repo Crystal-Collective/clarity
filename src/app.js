@@ -7,10 +7,10 @@ import theme from "./theme";
 
 const App = () => (
   <GoogleSheetsProvider>
-    <Router style={{ height: "100%" }}>
+    <Router>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Navigation style={{ height: "100%" }} />
+        <Navigation />
       </ThemeProvider>
     </Router>
   </GoogleSheetsProvider>
