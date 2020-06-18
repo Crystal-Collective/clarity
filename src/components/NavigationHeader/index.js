@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
   },
   hamburgerLink: {
     color: theme.palette.reallyReallyDarkGrey,
+    width: "100%",
+    height: "100%",
   },
   hamburgerMenu: {
     [theme.breakpoints.down("sm")]: {
