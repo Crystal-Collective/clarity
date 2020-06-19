@@ -17,13 +17,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: "#181818",
+    backgroundColor: theme.palette.black,
     height: "74px",
-    padding: "0 16px",
-  },
-  content: {
-    flexGrow: 1,
-    paddingTop: "74px",
   },
   hamburgerIcon: {
     color: theme.palette.yellow,
@@ -34,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   hamburgerMenu: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       display: "flex",
     },
     display: "none",
@@ -42,8 +37,12 @@ const useStyles = makeStyles((theme) => ({
   hamburgerMenuWrapper: {
     marginTop: "16px",
   },
+  headerContainer: {
+    width: "80%",
+    margin: "0 auto",
+  },
   inlineMenuItems: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       display: "none",
     },
   },
@@ -65,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   navLinkWrapper: {
     marginTop: "24px",
+    textAlign: "center",
   },
   navLinkReport: {
     color: theme.palette.reallyReallyDarkGrey,
@@ -88,139 +88,152 @@ const NavigationHeader = () => {
 
   return (
     <AppBar position="static" className={classes.appBar}>
-      <Grid container spacing={2}>
-        <Grid item xs={5}>
-          <Box className={classes.logoWrapper}>
-            <MaterialLink
-              underline={"none"}
-              className={classes.logoLink}
-              component={Link}
-              to="/"
-            >
-              Crystal
-            </MaterialLink>
-          </Box>
-        </Grid>
-        <Grid item container xs className={classes.inlineMenuItems}>
-          <Grid item xs>
-            <Box className={classes.navLinkWrapper}>
+      <Box className={classes.headerContainer}>
+        <Grid container spacing={2}>
+          <Grid item xs={5}>
+            <Box className={classes.logoWrapper}>
               <MaterialLink
                 underline={"none"}
-                className={classes.navLink}
+                className={classes.logoLink}
                 component={Link}
-                to={"/about"}
+                to="/"
               >
-                About
+                Crystal
               </MaterialLink>
             </Box>
           </Grid>
-          <Grid item xs>
-            <Box className={classes.navLinkWrapper}>
-              <MaterialLink
-                underline={"none"}
-                className={classes.navLink}
-                href="https://join.slack.com/t/crystalpolice/shared_invite/zt-essyn1xu-G5CAEuWgvSaZ04iIQ11FCQ"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Discuss on Slack
-              </MaterialLink>
-            </Box>
-          </Grid>
-          <Grid item xs>
-            <Box className={classes.navLinkWrapper}>
-              <MaterialLink
-                underline={"none"}
-                className={classes.navLink}
-                href="https://docs.google.com/spreadsheets/d/1_8sFcTwqlBvVgd7XTekIdBGQnMdyAnB5qxuKObwdauw/edit#gid=0"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Give Feedback
-              </MaterialLink>
-            </Box>
-          </Grid>
-          <Grid item xs>
-            <Box className={clsx(classes.navLinkWrapper, classes.reportBox)}>
-              <MaterialLink
-                underline={"none"}
-                className={clsx(classes.navLink, classes.navLinkReport)}
-                href="https://forms.gle/S4ohosYKn6NUQcps8"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                + Add Report
-              </MaterialLink>
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          xs
-          className={classes.hamburgerMenu}
-          justify="flex-end"
-        >
-          <Box className={classes.hamburgerMenuWrapper}>
-            <MenuIcon
-              fontSize={"large"}
-              className={classes.hamburgerIcon}
-              onClick={handleClick}
-            />
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>
+          <Grid
+            item
+            container
+            xs
+            direction="row"
+            className={classes.inlineMenuItems}
+            justify="space-between"
+            alignItems="center"
+          >
+            <Grid item xs>
+              <Box className={classes.navLinkWrapper}>
                 <MaterialLink
                   underline={"none"}
-                  className={classes.hamburgerLink}
+                  className={classes.navLink}
                   component={Link}
                   to={"/about"}
                 >
                   About
                 </MaterialLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+              </Box>
+            </Grid>
+            <Grid item xs>
+              <Box className={classes.navLinkWrapper}>
                 <MaterialLink
                   underline={"none"}
-                  className={classes.hamburgerLink}
+                  className={classes.navLink}
                   href="https://join.slack.com/t/crystalpolice/shared_invite/zt-essyn1xu-G5CAEuWgvSaZ04iIQ11FCQ"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Discuss on Slack
                 </MaterialLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+              </Box>
+            </Grid>
+            <Grid item xs>
+              <Box className={classes.navLinkWrapper}>
                 <MaterialLink
                   underline={"none"}
-                  className={classes.hamburgerLink}
+                  className={classes.navLink}
                   href="https://docs.google.com/spreadsheets/d/1_8sFcTwqlBvVgd7XTekIdBGQnMdyAnB5qxuKObwdauw/edit#gid=0"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   Give Feedback
                 </MaterialLink>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+              </Box>
+            </Grid>
+            <Grid item xs>
+              <Box className={clsx(classes.navLinkWrapper, classes.reportBox)}>
                 <MaterialLink
                   underline={"none"}
-                  className={clsx(classes.hamburgerLink, classes.navLinkReport)}
+                  className={clsx(classes.navLink, classes.navLinkReport)}
                   href="https://forms.gle/S4ohosYKn6NUQcps8"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   + Add Report
                 </MaterialLink>
-              </MenuItem>
-            </Menu>
-          </Box>
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            container
+            xs
+            className={classes.hamburgerMenu}
+            justify="flex-end"
+          >
+            <Box className={classes.hamburgerMenuWrapper}>
+              <MenuIcon
+                fontSize={"large"}
+                className={classes.hamburgerIcon}
+                onClick={handleClick}
+              />
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <MaterialLink
+                    underline={"none"}
+                    className={classes.hamburgerLink}
+                    component={Link}
+                    to={"/about"}
+                  >
+                    <div>About</div>
+                  </MaterialLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <MaterialLink
+                    underline={"none"}
+                    className={classes.hamburgerLink}
+                    href="https://join.slack.com/t/crystalpolice/shared_invite/zt-essyn1xu-G5CAEuWgvSaZ04iIQ11FCQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Discuss on Slack
+                  </MaterialLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <MaterialLink
+                    underline={"none"}
+                    className={classes.hamburgerLink}
+                    href="https://docs.google.com/spreadsheets/d/1_8sFcTwqlBvVgd7XTekIdBGQnMdyAnB5qxuKObwdauw/edit#gid=0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Give Feedback
+                  </MaterialLink>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <MaterialLink
+                    underline={"none"}
+                    className={clsx(
+                      classes.hamburgerLink,
+                      classes.navLinkReport
+                    )}
+                    href="https://forms.gle/S4ohosYKn6NUQcps8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    + Add Report
+                  </MaterialLink>
+                </MenuItem>
+              </Menu>
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </AppBar>
   );
 };
