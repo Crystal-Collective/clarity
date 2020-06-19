@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "16px",
   },
   headerContainer: {
-    width: "80%",
+    width: "60%",
     margin: "0 auto",
   },
   inlineMenuItems: {
@@ -89,8 +89,8 @@ const NavigationHeader = () => {
   return (
     <AppBar position="static" className={classes.appBar}>
       <Box className={classes.headerContainer}>
-        <Grid container spacing={2}>
-          <Grid item xs={5}>
+        <Grid container direction="row" justify="space-between">
+          <Grid item xs={2}>
             <Box className={classes.logoWrapper}>
               <MaterialLink
                 underline={"none"}
@@ -105,11 +105,10 @@ const NavigationHeader = () => {
           <Grid
             item
             container
-            xs
+            xs={8}
             direction="row"
             className={classes.inlineMenuItems}
-            justify="space-between"
-            alignItems="center"
+            justify="flex-end"
           >
             <Grid item xs>
               <Box className={classes.navLinkWrapper}>
