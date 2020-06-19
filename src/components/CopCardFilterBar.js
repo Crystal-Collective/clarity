@@ -7,6 +7,7 @@ const FilterBar = styled.div`
   align-items: center;
   height: 80px;
   width: 70%;
+  margin: "0 auto";
   box-shadow: 0px 1.408px 21.12px rgba(52, 32, 1, 0.12);
 `;
 

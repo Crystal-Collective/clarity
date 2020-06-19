@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopDetail } from "components";
 import { STATES } from "constants.js";
+import { Container, Grid } from "@material-ui/core";
 
 const getChargedOfficerData = (data) => {
   return data.map((incident, i) => {
@@ -50,18 +51,20 @@ class Home extends Component {
     }, initStateDict);
 
     return (
-      <div align="center">
-        <StateMap stateCount={stateCount} />
-        <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
-        {this.state.selectedCop && (
-          <CopDetail
-            cop={this.state.selectedCop}
-            allCops={data}
-            show={this.state.showPanel}
-            onClose={this.handleCopDetailClosed}
-          />
-        )}
-      </div>
+      <Container maxWidth="xl">
+        <Grid container direction="column" justify="center">
+          <StateMap stateCount={stateCount} />
+          <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
+          {this.state.selectedCop && (
+            <CopDetail
+              cop={this.state.selectedCop}
+              allCops={data}
+              show={this.state.showPanel}
+              onClose={this.handleCopDetailClosed}
+            />
+          )}
+        </Grid>
+      </Container>
     );
   }
   handleCopCardClicked(cop) {
