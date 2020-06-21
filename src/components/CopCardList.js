@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useGlobalFilter, useTable, useFilters } from "react-table";
-import CopCardFilterBar from "./CopCardFilterBar";
+import CopCardFilterBar from "./CopCarFilterBar";
 import { STATES } from "constants.js";
 import { CopCard } from "components";
 import matchSorter from "match-sorter";

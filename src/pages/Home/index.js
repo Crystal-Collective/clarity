@@ -55,7 +55,7 @@ const Home = (props) => {
   }, initStateDict);
 
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <Grid container direction="column" justify="center">
         <Paper elevation={0} className={classes.mapWrapper}>
           <Grid item>
