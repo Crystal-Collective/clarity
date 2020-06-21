@@ -56,7 +56,7 @@ const CopCardFilterBar = (props) => {
         container
         direction={"row"}
         alignContent="center"
-        justify="center"
+        justify="space-between"
         className={classes.filterBarContainer}
       >
         <Grid item xs={3}>

@@ -9,7 +9,6 @@ import getStatusMapping from "./utils/getStatusMapping";
 import { Grid } from "@material-ui/core";
 
 export const Wrapper = styled.div`
-  width: 1300px;
   display: flex;
   flex-wrap: wrap;
   min-height: 400px;
