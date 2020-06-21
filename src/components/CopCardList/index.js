@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useGlobalFilter, useTable, useFilters } from "react-table";
-import CopCardFilterBar from "./CopCarFilterBar";
+import CopCardFilterBar from "../CopCarFilterBar";
 import { STATES } from "constants.js";
 import { CopCard } from "components";
 import matchSorter from "match-sorter";
-import getStatusMapping from "./utils/getStatusMapping";
+import getStatusMapping from "../utils/getStatusMapping";
 import { Grid } from "@material-ui/core";
 
 export const Wrapper = styled.div`
