@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactSVG } from "react-svg";
 import { CopCard } from "components";
-import leftArrow from "../images/leftarrow.svg";
 import { COLORS } from "constants.js";
 
 const { yellow, reallyReallyDarkGrey } = COLORS;
@@ -51,12 +49,9 @@ export const PanelBody = styled.div`
   text-align: left;
 `;
 
-const CopCardWrapper = styled.div`
-  margin: 0px 0 96px -39px;
-`;
-
 const Incidents = styled.div`
   display: flex;
+  margin-top: 32px;
   font-weight: 500;
   font-size: 14px;
   flex-direction: column;
@@ -117,19 +112,12 @@ const getIndictments = (cop, cops) => {
 };
 
 function CopDetail(props) {
-  const { cop, allCops, onClose } = props;
+  const { cop, allCops } = props;
 
   return (
     <PanelContainer show={cop}>
       <Panel>
         <PanelHeader>
-          <Back onClick={onClose}>
-            <ReactSVG
-              src={leftArrow}
-              style={{ display: "inline-block", marginRight: "8px" }}
-            />
-            {"Back"}
-          </Back>
           <AddReport>
             <ReportLink
               href="https://forms.gle/S4ohosYKn6NUQcps8"
@@ -141,9 +129,7 @@ function CopDetail(props) {
           </AddReport>
         </PanelHeader>
         <PanelBody>
-          <CopCardWrapper>
-            <CopCard cop={cop} inline={true} />
-          </CopCardWrapper>
+          <CopCard cop={cop} inline={true} disableClick />
           <IncidentList incidents={getIndictments(cop, allCops)} />
         </PanelBody>
       </Panel>

@@ -210,6 +210,7 @@ function CopCardList(props) {
             <CopCard
               key={i}
               cop={cop}
+              cops={cops}
               inline={false}
               onFooterClick={props.onCardClick}
             />
