@@ -6,7 +6,7 @@ import { STATES } from "constants.js";
 import { CopCard } from "components";
 import matchSorter from "match-sorter";
 import getStatusMapping from "./utils/getStatusMapping";
-import { Container, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 export const Wrapper = styled.div`
   width: 1300px;
