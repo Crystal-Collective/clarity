@@ -3,7 +3,7 @@ const theme = createMuiTheme({
   palette: {
     black: "#181818",
     reallyReallyDarkGrey: "#333",
-    white: "#fff",
+    white: "#fafafa",
     yellow: "#fce21b",
   },
 });

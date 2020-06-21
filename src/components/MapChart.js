@@ -17,7 +17,7 @@ const getStyles = (stateCount, name) => {
 
 const MapChart = ({ setTooltipContent, stateCount }) => {
   return (
-    <ComposableMap data-tip="" projection="geoAlbersUsa" width={1500}>
+    <ComposableMap data-tip="" projection="geoAlbersUsa">
       <Geographies geography={geoUrl}>
         {({ geographies }) => (
           <>

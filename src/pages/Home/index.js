@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopDetail } from "components";
 import { STATES } from "constants.js";
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  homeWrapper: {
-    paddingTop: "74px",
+  mapWrapper: {
+    margin: "16px auto 0",
+    backgroundColor: theme.palette.white,
+    maxWidth: "70%",
   },
 }));
 
@@ -33,6 +35,8 @@ const getChargedOfficerData = (data) => {
 };
 
 const Home = (props) => {
+  const classes = useStyles();
+
   const data = getChargedOfficerData(props.db["Charged Officers"].slice(1));
   const [state, setState] = useState({
     selectedCop: undefined,
@@ -53,10 +57,12 @@ const Home = (props) => {
   return (
     <Container maxWidth="xl">
       <Grid container direction="column" justify="center">
-        <Grid item xs>
-          <StateMap stateCount={stateCount} />
-        </Grid>
-        <Grid item xs={10}>
+        <Paper elevation={0} className={classes.mapWrapper}>
+          <Grid item>
+            <StateMap stateCount={stateCount} />
+          </Grid>
+        </Paper>
+        <Grid item>
           <CopCardList
             cops={data}
             onCardClick={() => setState({ selectedCop })}
