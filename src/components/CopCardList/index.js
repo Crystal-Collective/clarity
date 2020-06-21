@@ -8,13 +8,6 @@ import matchSorter from "match-sorter";
 import getStatusMapping from "../utils/getStatusMapping";
 import { Grid } from "@material-ui/core";
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 400px;
-  justify-content: center;
-`;
-
 const Summary = styled.div`
   color: #aaa;
   font-size: 16px;
@@ -210,20 +203,18 @@ function CopCardList(props) {
       <Grid item>
         <Summary>{`${rows.length} cleaned records of 5,000 total records`}</Summary>
       </Grid>
-      <Grid item>
-        <Wrapper>
-          {rows.map((row, i) => {
-            const { original: cop } = row;
-            return (
-              <CopCard
-                key={i}
-                cop={cop}
-                inline={false}
-                onFooterClick={props.onCardClick}
-              />
-            );
-          })}
-        </Wrapper>
+      <Grid item container justify="space-around" spacing={3}>
+        {rows.map((row, i) => {
+          const { original: cop } = row;
+          return (
+            <CopCard
+              key={i}
+              cop={cop}
+              inline={false}
+              onFooterClick={props.onCardClick}
+            />
+          );
+        })}
       </Grid>
     </Grid>
   );

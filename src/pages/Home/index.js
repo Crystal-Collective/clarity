@@ -65,7 +65,10 @@ const Home = (props) => {
         <Grid item>
           <CopCardList
             cops={data}
-            onCardClick={() => setState({ selectedCop })}
+            onCardClick={() => {
+              console.log("clicked");
+              setState({ selectedCop });
+            }}
           />
           {selectedCop && (
             <CopDetail
