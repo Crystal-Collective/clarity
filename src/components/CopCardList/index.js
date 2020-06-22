@@ -1,18 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useGlobalFilter, useTable, useFilters } from "react-table";
-import CopCardFilterBar from "./CopCardFilterBar";
+import CopCardFilterBar from "../CopCarFilterBar";
 import { STATES } from "constants.js";
 import { CopCard } from "components";
 import matchSorter from "match-sorter";
-import getStatusMapping from "./utils/getStatusMapping";
-
-export const Wrapper = styled.div`
-  width: 1300px;
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 400px;
-`;
+import getStatusMapping from "../utils/getStatusMapping";
+import { Grid } from "@material-ui/core";
 
 const Summary = styled.div`
   color: #aaa;
@@ -198,27 +192,32 @@ function CopCardList(props) {
   const headers = headerGroups[0].headers;
 
   return (
-    <>
-      <CopCardFilterBar
-        headers={headers}
-        setGlobalFilter={setGlobalFilter}
-        globalFilter={state.globalFilter}
-      />
-      <Summary>{`${rows.length} cleaned records of 5,000 total records`}</Summary>
-      <Wrapper>
+    <Grid container item align="center" direction="column">
+      <Grid item>
+        <CopCardFilterBar
+          headers={headers}
+          setGlobalFilter={setGlobalFilter}
+          globalFilter={state.globalFilter}
+        />
+      </Grid>
+      <Grid item>
+        <Summary>{`${rows.length} cleaned records of 5,000 total records`}</Summary>
+      </Grid>
+      <Grid item container justify="space-around" spacing={3}>
         {rows.map((row, i) => {
           const { original: cop } = row;
           return (
             <CopCard
               key={i}
               cop={cop}
+              cops={cops}
               inline={false}
               onFooterClick={props.onCardClick}
             />
           );
         })}
-      </Wrapper>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 

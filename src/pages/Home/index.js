@@ -1,8 +1,20 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { withGoogleSheets } from "react-db-google-sheets";
 import { CopCardList, StateMap, CopDetail } from "components";
 import { STATES } from "constants.js";
+import { Container, Grid, makeStyles, Paper } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  mapWrapper: {
+    margin: "16px auto 0",
+    backgroundColor: theme.palette.white,
+    maxWidth: "70%",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "74px",
+    },
+  },
+}));
 
 const getChargedOfficerData = (data) => {
   return data.map((incident, i) => {
@@ -24,53 +36,56 @@ const getChargedOfficerData = (data) => {
     };
   });
 };
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    // Remove the first row in the table that is holding instructions
-    // https://docs.google.com/spreadsheets/d/14eyaLbQEIq3_ZKQCSHSLoyspo8Y4PoGnoW6LLfwNTmE/edit?pli=1#gid=1387748258
-    this.state = {
-      selectedCop: undefined,
-      data: getChargedOfficerData(props.db["Charged Officers"].slice(1)),
-    };
-    this.handleCopCardClicked = this.handleCopCardClicked.bind(this);
-    this.handleCopDetailClosed = this.handleCopDetailClosed.bind(this);
-  }
 
-  render() {
-    const { data } = this.state;
-    const initStateDict = STATES.reduce((acc, state) => {
-      acc[state] = 0;
-      return acc;
-    }, {});
+const Home = (props) => {
+  const classes = useStyles();
 
-    const stateCount = data.reduce((acc, row) => {
-      acc[row.state] += 1;
-      return acc;
-    }, initStateDict);
+  const data = getChargedOfficerData(props.db["Charged Officers"].slice(1));
+  const [state, setState] = useState({
+    selectedCop: undefined,
+  });
 
-    return (
-      <div align="center">
-        <StateMap stateCount={stateCount} />
-        <CopCardList cops={data} onCardClick={this.handleCopCardClicked} />
-        {this.state.selectedCop && (
-          <CopDetail
-            cop={this.state.selectedCop}
-            allCops={data}
-            show={this.state.showPanel}
-            onClose={this.handleCopDetailClosed}
+  const { selectedCop } = state;
+
+  const initStateDict = STATES.reduce((acc, state) => {
+    acc[state] = 0;
+    return acc;
+  }, {});
+
+  const stateCount = data.reduce((acc, row) => {
+    acc[row.state] += 1;
+    return acc;
+  }, initStateDict);
+
+  return (
+    <Container maxWidth="lg">
+      <Grid container direction="column" justify="center">
+        <Paper elevation={0} className={classes.mapWrapper}>
+          <Grid item>
+            <StateMap stateCount={stateCount} />
+          </Grid>
+        </Paper>
+        <Grid item>
+          <CopCardList
+            cops={data}
+            onCardClick={() => {
+              console.log("clicked");
+              setState({ selectedCop });
+            }}
           />
-        )}
-      </div>
-    );
-  }
-  handleCopCardClicked(cop) {
-    this.setState({ selectedCop: cop });
-  }
-  handleCopDetailClosed() {
-    this.setState({ selectedCop: undefined });
-  }
-}
+          {selectedCop && (
+            <CopDetail
+              cop={selectedCop}
+              allCops={data}
+              show={!!selectedCop}
+              onClose={() => setState({ selectedCop: undefined })}
+            />
+          )}
+        </Grid>
+      </Grid>
+    </Container>
+  );
+};
 
 Home.propTypes = {
   db: PropTypes.shape({

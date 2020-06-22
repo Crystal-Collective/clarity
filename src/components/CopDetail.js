@@ -1,30 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactSVG } from "react-svg";
 import { CopCard } from "components";
-import leftArrow from "../images/leftarrow.svg";
 import { COLORS } from "constants.js";
+import { Grid, Paper, makeStyles } from "@material-ui/core";
+import { orderBy } from "lodash";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 const { yellow, reallyReallyDarkGrey } = COLORS;
 
-export const PanelContainer = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  width: 680px;
-  transform: ${(props) => (props.show ? "translateX(0%)" : "translateX(100%)")};
-  box-shadow: 0px 1.408px 21.12px rgba(52, 32, 1, 0.12);
-  z-index: 99;
-  background: #fff;
-`;
+const useStyles = makeStyles((theme) => ({
+  drawerBackButton: {
+    [theme.breakpoints.down("sm")]: {
+      display: "block",
+      margin: "16px",
+    },
+    display: "none",
+  },
+  incidentPaper: {
+    padding: "16px",
+  },
+  incidentRow: {
+    padding: "16px 0",
+  },
+}));
 
 export const Panel = styled.div`
   padding: 64px 32px 32px;
-`;
-
-const PanelHeader = styled.div`
-  display: flex;
 `;
 
 export const Back = styled.div`
@@ -36,6 +37,7 @@ export const Back = styled.div`
 `;
 
 const AddReport = styled.div`
+  margin-bottom: 16px;
   margin-left: auto;
   padding: 16px;
   background-color: ${yellow};
@@ -45,34 +47,6 @@ const ReportLink = styled.a`
   text-decoration: none;
   color: ${reallyReallyDarkGrey};
   font-weight: 700;
-`;
-
-export const PanelBody = styled.div`
-  text-align: left;
-`;
-
-const CopCardWrapper = styled.div`
-  margin: 0px 0 96px -39px;
-`;
-
-const Incidents = styled.div`
-  display: flex;
-  font-weight: 500;
-  font-size: 14px;
-  flex-direction: column;
-`;
-
-const IncidentHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  margin-bottom: 16px;
-`;
-
-const IncidentFieldHeader = styled.div`
-  flex: 1;
-  padding-left: 16px;
-  color: #9c9c9c;
 `;
 
 export const Incident = styled.div`
@@ -87,26 +61,50 @@ export const IncidentFieldData = styled.div`
 `;
 
 function IncidentList(props) {
+  const classes = useStyles();
+
   const { incidents } = props;
+
+  const dateSortedIncidents = orderBy(incidents, ["date"], ["desc"]);
   return (
-    <Incidents>
-      <IncidentHeader>
-        <IncidentFieldHeader>{"INCIDENT"}</IncidentFieldHeader>
-        <IncidentFieldHeader>{"YEAR"}</IncidentFieldHeader>
-        <IncidentFieldHeader>{"STATUS"}</IncidentFieldHeader>
-      </IncidentHeader>
-      {incidents &&
-        incidents.map((incident, i) => {
+    <Paper elevation={0} className={classes.incidentPaper}>
+      <Grid container item direction="row" justify="space-between">
+        <Grid item xs={5}>
+          {"INCIDENT"}
+        </Grid>
+        <Grid item xs={2}>
+          {"YEAR"}
+        </Grid>
+        <Grid item xs={5}>
+          {"STATUS"}
+        </Grid>
+      </Grid>
+      {dateSortedIncidents &&
+        dateSortedIncidents.map((incident, i) => {
           const { chargedOrIndicted, date, victim } = incident;
           return (
-            <Incident key={i}>
-              <IncidentFieldData>{victim}</IncidentFieldData>
-              <IncidentFieldData>{date}</IncidentFieldData>
-              <IncidentFieldData>{chargedOrIndicted}</IncidentFieldData>
-            </Incident>
+            <Paper elevation={0} className={classes.incidentRow}>
+              <Grid
+                container
+                item
+                direction="row"
+                justify="space-between"
+                key={i}
+              >
+                <Grid item xs={5}>
+                  {victim}
+                </Grid>
+                <Grid item xs={2}>
+                  {date}
+                </Grid>
+                <Grid item xs={5}>
+                  {chargedOrIndicted}
+                </Grid>
+              </Grid>
+            </Paper>
           );
         })}
-    </Incidents>
+    </Paper>
   );
 }
 
@@ -117,37 +115,27 @@ const getIndictments = (cop, cops) => {
 };
 
 function CopDetail(props) {
-  const { cop, allCops, onClose } = props;
+  const classes = useStyles();
+  const { cop, allCops, onClickBack } = props;
 
   return (
-    <PanelContainer show={cop}>
-      <Panel>
-        <PanelHeader>
-          <Back onClick={onClose}>
-            <ReactSVG
-              src={leftArrow}
-              style={{ display: "inline-block", marginRight: "8px" }}
-            />
-            {"Back"}
-          </Back>
-          <AddReport>
-            <ReportLink
-              href="https://forms.gle/S4ohosYKn6NUQcps8"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              + Add Report
-            </ReportLink>
-          </AddReport>
-        </PanelHeader>
-        <PanelBody>
-          <CopCardWrapper>
-            <CopCard cop={cop} inline={true} />
-          </CopCardWrapper>
-          <IncidentList incidents={getIndictments(cop, allCops)} />
-        </PanelBody>
-      </Panel>
-    </PanelContainer>
+    <Paper elevation={0}>
+      <ArrowBackIcon
+        className={classes.drawerBackButton}
+        onClick={onClickBack}
+      />
+      <AddReport>
+        <ReportLink
+          href="https://forms.gle/S4ohosYKn6NUQcps8"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          + Add Report
+        </ReportLink>
+      </AddReport>
+      <CopCard cop={cop} inline={true} disableClick />
+      <IncidentList incidents={getIndictments(cop, allCops)} />
+    </Paper>
   );
 }
 

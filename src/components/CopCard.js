@@ -1,23 +1,27 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { ReactSVG } from "react-svg";
-import rightArrow from "images/rightarrow.svg";
 import getStatusMapping from "./utils/getStatusMapping";
+import {
+  makeStyles,
+  Grid,
+  Card,
+  CardActionArea,
+  Drawer,
+} from "@material-ui/core";
+import CopDetail from "./CopDetail";
 
-export const Card = styled.div`
-  text-align: left;
-  position: relative;
-  margin: 13px;
-  padding: 26px;
-  width: 352px;
-  height: ${(props) => (props.inline ? "200px" : "300px")};
-  box-shadow: ${(props) =>
-    props.inline ? "none" : "0px 1.408px 21.12px rgba(52, 32, 1, 0.12)"};
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-`;
+const useStyles = makeStyles((theme) => ({
+  cardContainer: {
+    textAlign: "left",
+    padding: "26px",
+    width: "352px",
+    height: "300px",
+    fontWeight: 500,
+    fontSize: "14px",
+    lineHeight: "17px",
+  },
+}));
 
 export const CardHeader = styled.div`
   font-weight: 900;
@@ -79,49 +83,75 @@ export const StatusBadge = styled.div`
   display: inline-block;
 `;
 
-function CopCard(props) {
-  const { cop, inline, onFooterClick } = props;
+const CopCard = (props) => {
+  const classes = useStyles();
+  const { disableClick, cop, cops } = props;
   const { date, incidentCount, location, name, status, victim } = cop;
+
+  const [state, setState] = useState({ open: false });
+  const { open } = state;
+
+  const toggleDrawer = (open) => (event) => {
+    console.log("Showing", open);
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ open });
+  };
+
+  console.log(cops);
+
   return (
-    <Card inline={inline}>
-      <CardHeader>{name}</CardHeader>
-      <CardBody>
-        <CardRow>
-          <CardInfoItem>
-            <CardInfoItemLabel>{"RECENT INCIDENT"}</CardInfoItemLabel>
-            <CardInfoItemValue>{victim}</CardInfoItemValue>
-          </CardInfoItem>
-          <CardInfoItem>
-            <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
-            <CardInfoItemValue>{location}</CardInfoItemValue>
-          </CardInfoItem>
-        </CardRow>
-        <CardRow>
-          <CardInfoItem>
-            <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
-            <CardInfoItemValue>{date}</CardInfoItemValue>
-          </CardInfoItem>
-          <CardInfoItem>
-            <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
-            <CardInfoItemValue>{incidentCount}</CardInfoItemValue>
-          </CardInfoItem>
-        </CardRow>
-        <CardRow>
-          <CardInfoItemFullRow>
-            <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
-            <StatusBadge>{getStatusMapping(status)}</StatusBadge>
-          </CardInfoItemFullRow>
-        </CardRow>
-      </CardBody>
-      {!inline && (
-        <CardFooter onClick={() => onFooterClick(cop)}>
-          {"Details"}{" "}
-          <ReactSVG src={rightArrow} style={{ marginLeft: "8px" }} />
-        </CardFooter>
-      )}
-    </Card>
+    <>
+      <Grid item>
+        <CardActionArea onClick={toggleDrawer(true)} disabled={disableClick}>
+          <Card className={classes.cardContainer}>
+            <CardHeader>{name}</CardHeader>
+            <CardBody>
+              <CardRow>
+                <CardInfoItem>
+                  <CardInfoItemLabel>{"RECENT INCIDENT"}</CardInfoItemLabel>
+                  <CardInfoItemValue>{victim}</CardInfoItemValue>
+                </CardInfoItem>
+                <CardInfoItem>
+                  <CardInfoItemLabel>{"LOCATION"}</CardInfoItemLabel>
+                  <CardInfoItemValue>{location}</CardInfoItemValue>
+                </CardInfoItem>
+              </CardRow>
+              <CardRow>
+                <CardInfoItem>
+                  <CardInfoItemLabel>{"YEAR"}</CardInfoItemLabel>
+                  <CardInfoItemValue>{date}</CardInfoItemValue>
+                </CardInfoItem>
+                <CardInfoItem>
+                  <CardInfoItemLabel>{"# INCIDENTS"}</CardInfoItemLabel>
+                  <CardInfoItemValue>{incidentCount}</CardInfoItemValue>
+                </CardInfoItem>
+              </CardRow>
+              <CardRow>
+                <CardInfoItemFullRow>
+                  <CardInfoItemLabel>{"STATUS"}</CardInfoItemLabel>
+                  <StatusBadge>{getStatusMapping(status)}</StatusBadge>
+                </CardInfoItemFullRow>
+              </CardRow>
+            </CardBody>
+          </Card>
+        </CardActionArea>
+      </Grid>
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={toggleDrawer(false)}
+        className={classes.drawer}
+      >
+        <CopDetail cop={cop} allCops={cops} onClickBack={toggleDrawer(false)} />
+      </Drawer>
+    </>
   );
-}
+};
 
 export default CopCard;
 
