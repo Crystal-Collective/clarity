@@ -141,8 +141,13 @@ const CopCard = (props) => {
           </Card>
         </CardActionArea>
       </Grid>
-      <Drawer open={open} onClose={toggleDrawer(false)}>
-        <CopDetail cop={cop} allCops={cops} />
+      <Drawer
+        anchor="right"
+        open={open}
+        onClose={toggleDrawer(false)}
+        className={classes.drawer}
+      >
+        <CopDetail cop={cop} allCops={cops} onClickBack={toggleDrawer(false)} />
       </Drawer>
     </>
   );

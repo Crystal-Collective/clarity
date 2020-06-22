@@ -87,7 +87,7 @@ const NavigationHeader = () => {
   };
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Box className={classes.headerContainer}>
         <Grid container direction="row" justify="space-between">
           <Grid item xs={2}>
