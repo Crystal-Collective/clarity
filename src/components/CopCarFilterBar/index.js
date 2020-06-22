@@ -5,7 +5,12 @@ import { Paper, makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   filterBarContainer: {
-    height: "74px",
+    minHeight: "74px",
+    padding: "16px",
+  },
+  filterItem: {
+    textAlign: "left",
+    margin: "8px 0",
   },
 }));
 
@@ -59,7 +64,7 @@ const CopCardFilterBar = (props) => {
         justify="space-between"
         className={classes.filterBarContainer}
       >
-        <Grid item xs={3}>
+        <Grid item md={3} xs={12} className={classes.filterItem}>
           <GlobalFilter
             setGlobalFilter={setGlobalFilter}
             globalFilter={globalFilter}
@@ -69,7 +74,7 @@ const CopCardFilterBar = (props) => {
           const { Header, render } = column;
           const titleToSkip = "Name";
           return (
-            <Grid item xs={2} key={i}>
+            <Grid item md={2} xs={12} key={i} className={classes.filterItem}>
               {Header !== titleToSkip && <FilterTitle>{Header}:</FilterTitle>}
               <Filter>{render("Filter")}</Filter>
             </Grid>

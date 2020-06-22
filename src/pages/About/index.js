@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   aboutPage: {
     backgroundColor: theme.palette.black,
     minHeight: "100vh",
-    padding: "64px 0",
+    padding: "90px 0 64px",
   },
   aboutPageContent: {
     margin: "0 auto",
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-      padding: "32px 48px 32px",
+      padding: "0 48px 32px",
     },
   },
 
