@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
     margin: "16px auto 0",
     backgroundColor: theme.palette.white,
     maxWidth: "70%",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "74px",
+    },
   },
 }));
 

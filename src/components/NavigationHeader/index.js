@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   headerContainer: {
     width: "60%",
     margin: "0 auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "90%",
+    },
   },
   inlineMenuItems: {
     [theme.breakpoints.down("md")]: {
