@@ -74,7 +74,7 @@ const CopCardFilterBar = (props) => {
           const { Header, render } = column;
           const titleToSkip = "Name";
           return (
-            <Grid item md={2} xs={12} key={i} className={classes.filterItem}>
+            <Grid item md={3} xs={12} key={i} className={classes.filterItem}>
               {Header !== titleToSkip && <FilterTitle>{Header}:</FilterTitle>}
               <Filter>{render("Filter")}</Filter>
             </Grid>
